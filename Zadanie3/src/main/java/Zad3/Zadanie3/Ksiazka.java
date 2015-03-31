@@ -21,12 +21,7 @@ public class Ksiazka implements Comparable<Ksiazka>
 		this.genre=genre;
 		this.ISBN=ISBN;
 	}
-	
-//	public Ksiazka() 
-//	{
-//	}
-
-	
+		
 	@Override
 	public String toString()
 	{
