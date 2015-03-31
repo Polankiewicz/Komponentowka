@@ -12,10 +12,10 @@ public class Ksiazka implements Comparable<Ksiazka>
 	private String title;
 	private String author;
 	private String genre;
-	private int ISBN;
+	private String ISBN;
 	
 	
-	public Ksiazka(String title, String author, String genre, int ISBN)
+	public Ksiazka(String title, String author, String genre, String ISBN)
 	{
 		this.title=title;
 		this.author=author;
@@ -57,7 +57,7 @@ public class Ksiazka implements Comparable<Ksiazka>
 		return genre;
 	}
 	
-	public int getISBN()
+	public String getISBN()
 	{
 		return ISBN;
 	}
