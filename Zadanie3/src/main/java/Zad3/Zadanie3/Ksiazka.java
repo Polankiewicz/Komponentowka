@@ -8,10 +8,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class Ksiazka implements Comparable<Ksiazka>
 {
-	String title;
-	String author;
-	String genre;
-	int ISBN;
+	private String title;
+	private String author;
+	private String genre;
+	private int ISBN;
 	
 	
 	public Ksiazka(String title, String author, String genre, int ISBN)

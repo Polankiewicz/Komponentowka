@@ -6,18 +6,31 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Ksiegarnia {
+	
+	List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
+	
 
 	public static void main( String[] args )
 	{
 	    //System.out.println( "Hello World!" );
 		
 		Ksiegarnia main = new Ksiegarnia();
-		main.program();
+		main.dodaj();
+		main.wyswietl();
+		main.rozmiar();
+		main.usun();
+		main.sortujNormalnie();
+		main.wyswietl();
+		main.rozmiar();
+		main.wysietlDokladnie();
+		main.sortujKomparator();
+		main.wyswietl();
+		main.wysietlDokladnie();
+		main.rozmiar();
 	}
 	
-	private void program()
+	public void dodaj()
 	{
-		List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
 		ksiazki.add(new Ksiazka("Księżniczka z lodu", "Camilla Laeckberg", "Kryminał", 10));
 		ksiazki.add(new Ksiazka("Kamieniarz", "Camilla Laeckberg", "Kryminał", 11));
 		ksiazki.add(new Ksiazka("Niemiecki bękart", "Camilla Laeckberg", "Kryminał", 12));
@@ -29,15 +42,20 @@ public class Ksiegarnia {
 		ksiazki.add(new Ksiazka("Pogromca lwów", "Camilla Laeckberg", "Kryminał", 156));
 		ksiazki.add(new Ksiazka("Czerwony krąg", "Brandon Webb", "Biografia", 125));
 		ksiazki.add(new Ksiazka("Boże igrzysko", "Norman Davis", "Historyczna", 97));
-		
-		
-		System.out.println("\nNieposortowana lista: ");
-		for(Ksiazka ksiazka : ksiazki)
-		{
-			System.out.println(ksiazka);
-		}
-		
-		
+	}
+	
+	public void usun()
+	{
+		ksiazki.remove(5);
+	}
+	
+	public void wysietlDokladnie()
+	{
+		ksiazki.get(3);
+	}
+	
+	public void sortujNormalnie()
+	{
 		Collections.sort(ksiazki);
 		 
 	    System.out.println("\nPosortowana lista: ");
@@ -45,18 +63,35 @@ public class Ksiegarnia {
 	    {
 	        System.out.println(ksiazka);
 	    }
-	    
-	    
-	    Collections.sort(ksiazki, new KomparatorISBN());
+	}
+	
+	public void sortujKomparator()
+	{
+		Collections.sort(ksiazki, new KomparatorISBN());
 	    
 	    System.out.println("\nPosortowane wg numeru ISBN: ");
 	    for(Ksiazka ksiazka : ksiazki) 
 	    {
 	        System.out.println(ksiazka);
 	    }
-	    
 	}
 	
+	public void rozmiar()
+	{
+		System.out.println("\nRozmiar listy to: " + ksiazki.size());
+	}
+	
+	public void wyswietl()
+	{
+		
+		System.out.println("\nNieposortowana lista: ");
+		for(Ksiazka ksiazka : ksiazki)
+		{
+			System.out.println(ksiazka);
+		}	    
+	}
+	
+
 	private class KomparatorISBN implements Comparator<Ksiazka>
 	{
 		public int compare(Ksiazka k1, Ksiazka k2)
