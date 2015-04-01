@@ -83,12 +83,15 @@ public class Ksiegarnia {
 	public void appendElement(String tytul, String autor, String gatunek, String ISBN)
 	{
 		final int N = tab.length;
-		tab = new String[N+1][4];
+		Arrays.copyOf(tab, N+1);
 	    
 		tab[N+1][0] = tytul;
 		tab[N+1][1] = autor;
 		tab[N+1][2] = gatunek;
 		tab[N+1][3] = ISBN;
+		
+		
+		
 	}
 	
 	public void removeElement(int x, int y) throws Exception
