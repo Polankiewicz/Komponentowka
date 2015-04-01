@@ -9,10 +9,7 @@ import java.util.List;
 
 
 public class Ksiegarnia {
-	
-	List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
-
-	
+		
 	private String[][] tab;
 	private String[][] temp;
 	
@@ -89,14 +86,11 @@ public class Ksiegarnia {
 		tab[N+1][1] = autor;
 		tab[N+1][2] = gatunek;
 		tab[N+1][3] = ISBN;
-		
-		
-		
 	}
 	
-	public void removeElement(int x, int y) throws Exception
+	public void removeElement(int x) throws Exception
 	{
-		if(x <= 0 || x >= tab.length || y<=0 || y>=tab[x].length) throw new Exception();
+		if(x <= 0 || x >= tab.length) throw new Exception();
 		
 		final int N = tab.length;
 		tab = new String[N-1][4];
@@ -104,7 +98,7 @@ public class Ksiegarnia {
 		
 		for(int i=0; i<N && i != x ; i++)
 		{
-			for(int j=0; j<4 && j != y; j++)
+			for(int j=0; j<4; j++)
 			{
 				temp[i][j]=tab[i][j];
 				tab[i][j]=temp[i][j];
@@ -112,11 +106,16 @@ public class Ksiegarnia {
 		}
 	}
 	
-	public String getElement(int x, int y) throws Exception
+	public String getElement(int x) throws Exception
 	{
-		if(x <= 0 || x >= tab.length || y<=0 || y>=tab[x].length) throw new Exception();
+		if(x <= 0 || x >= tab.length) throw new Exception();
 		
-		String elem = tab[x][y];
+		String e1 = tab[x][0];
+		String e2 = tab[x][1];
+		String e3 = tab[x][2];
+		String e4 = tab[x][3];
+		
+		String elem = e1 + " " + e2 + " " + e3 + " " + e4;
 		return elem;
 	}
 	
@@ -151,14 +150,4 @@ public class Ksiegarnia {
 			System.out.println(" ");
 		}	    
 	}
-
-
-//class KomparatorISBN implements Comparator<String>
-//{
-//	public int compare(String k1, String k2)
-//	{
-//		String ISBN = k1.getISBN() - k2.getISBN();
-//		if (ISBN == 0) { return k1.compareTo(k2); }
-//		return ISBN;
-//	}
 }
