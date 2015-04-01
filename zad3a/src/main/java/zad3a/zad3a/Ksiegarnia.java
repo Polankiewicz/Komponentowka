@@ -13,31 +13,17 @@ public class Ksiegarnia {
 	List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
 
 	
-	public String[][] tab;
-	public String[][] tab2;
+	private String[][] tab;
+	private String[][] temp;
 	
-	
-	
-//	private int[] testtab = {1};
-//    private int[] testowa;
-//    private int suma = 0;
-	
-    
 	public String[][] getTab()
 	{
 		return tab;
 	}
 	
     
-    public void ksiegarnia(int n) 
-    {    	
-    	tab = new String[n][];
-    	
-    	for(int i=0; i<n; i++)
-    	{
-    		tab[i] = new String[i+1];
-    	}
-    	
+    public Ksiegarnia() 
+    {       	
     	tab[0][0] = "Kziężniczka z lodu";
     	tab[0][1] = "Camilla Laeckberg";
     	tab[0][2] = "Kryminał";
@@ -96,62 +82,81 @@ public class Ksiegarnia {
 	
 	public void appendElement(String tytul, String autor, String gatunek, String ISBN)
 	{
-		final int N = tab.length + 1;
+		final int N = tab.length;
+		tab = new String[N+1][4];
 	    
-		tab[N][0] = tytul;
-		tab[N][1] = autor;
-		tab[N][2] = gatunek;
-		tab[N][3] = ISBN;
+		tab[N+1][0] = tytul;
+		tab[N+1][1] = autor;
+		tab[N+1][2] = gatunek;
+		tab[N+1][3] = ISBN;
 	}
 	
-//	public void removeElement(int x) throws Exception
-//	{
-//		if(x <= 0 || x >= ksiazki.size()) throw new Exception();
-//		
-//		tab.remove(x);
-//		
-//		tab.
-//	}
-//	
-//	public Ksiazka getElement(int x) throws Exception
-//	{
-//		if(x <= 0 || x >= ksiazki.size()) throw new Exception();
-//		
-//		return ksiazki.get(x);
-//	}
-//	
-//	public int size()
-//	{
-//		return ksiazki.size();
-//	}
-//	
-//	public void sort()
-//	{
-//		Collections.sort(ksiazki);
-//	}
-//	
-//	public void sort(Comparator x)
-//	{
-//		Collections.sort(ksiazki, x);
-//	}
-//	
-//	public void print()
-//	{
-//		for(Ksiazka ksiazka : ksiazki)
-//		{
-//			System.out.println(ksiazka);
-//		}	    
-//	}
-//	
-//}
-//
-//
-//class KomparatorISBN implements Comparator<Ksiazka>
+	public void removeElement(int x, int y) throws Exception
+	{
+		if(x <= 0 || x >= tab.length || y<=0 || y>=tab[x].length) throw new Exception();
+		
+		final int N = tab.length;
+		tab = new String[N-1][4];
+		temp = new String[N-1][4];
+		
+		for(int i=0; i<N && i != x ; i++)
+		{
+			for(int j=0; j<4 && j != y; j++)
+			{
+				temp[i][j]=tab[i][j];
+				tab[i][j]=temp[i][j];
+			}
+		}
+	}
+	
+	public String getElement(int x, int y) throws Exception
+	{
+		if(x <= 0 || x >= tab.length || y<=0 || y>=tab[x].length) throw new Exception();
+		
+		String elem = tab[x][y];
+		return elem;
+	}
+	
+	public int rowSize()
+	{
+		return tab.length;
+	}
+	
+	public int columnSize()
+	{
+		return tab[0].length;
+	}
+	
+	public void sort()
+	{
+		Arrays.sort(tab);
+	}
+	
+	public void sort(Comparator x)
+	{
+		Arrays.sort(tab, x);
+	}
+	
+	public void print()
+	{
+		for(int i=0; i<tab.length; i++)
+		{
+			for(int j=0; j<tab[0].length; j++)
+			{
+				System.out.println(tab[i][j] + " ");
+			}
+			System.out.println(" ");
+		}	    
+	}
+
+
+//class KomparatorISBN implements Comparator<String>
 //{
-//	public int compare(Ksiazka k1, Ksiazka k2)
+//	public int compare(String k1, String k2)
 //	{
-//		int ISBN = k1.getISBN() - k2.getISBN();
+//		String ISBN = k1.getISBN() - k2.getISBN();
 //		if (ISBN == 0) { return k1.compareTo(k2); }
 //		return ISBN;
 //	}
+//}
 }
