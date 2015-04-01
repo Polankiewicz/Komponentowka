@@ -31,14 +31,14 @@ public class Ksiegarnia {
 	
 	public void removeElement(int x) throws Exception
 	{
-		if(x <= 0 || x >= ksiazki.size()) throw new Exception();
+		if(x < 0 || x >= ksiazki.size()) throw new Exception();
 		
 		ksiazki.remove(x);
 	}
 	
 	public Ksiazka getElement(int x) throws Exception
 	{
-		if(x <= 0 || x >= ksiazki.size()) throw new Exception();
+		if(x < 0 || x >= ksiazki.size()) throw new Exception();
 		
 		return ksiazki.get(x);
 	}
