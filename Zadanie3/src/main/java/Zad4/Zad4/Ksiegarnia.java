@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Ksiegarnia {
 	
-	List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
+	private List<Ksiazka> ksiazki = new ArrayList<Ksiazka>();
 	
 	public Ksiegarnia()
 	{
@@ -53,7 +53,7 @@ public class Ksiegarnia {
 		Collections.sort(ksiazki);
 	}
 	
-	public void sort(Comparator x)
+	public void sort(Comparator<Ksiazka> x)
 	{
 		Collections.sort(ksiazki, x);
 	}

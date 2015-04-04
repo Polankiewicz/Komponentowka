@@ -12,10 +12,10 @@ public class Ksiazka implements Comparable<Ksiazka>
 	private String title;
 	private String author;
 	private String genre;
-	private String ISBN;
+	private int ISBN;
 	
 	
-	public Ksiazka(String title, String author, String genre, String ISBN)
+	public Ksiazka(String title, String author, String genre, int ISBN)
 	{
 		this.title=title;
 		this.author=author;
@@ -30,7 +30,8 @@ public class Ksiazka implements Comparable<Ksiazka>
 				append("author", author).append("genre", genre).append("ISBN", ISBN).toString();
 	}
 	
-    public int compareTo(Ksiazka k) {
+    public int compareTo(Ksiazka k) 
+    {
         int porownaniAutorzy = author.compareTo(k.author);
  
         if(porownaniAutorzy == 0) {
@@ -57,7 +58,7 @@ public class Ksiazka implements Comparable<Ksiazka>
 		return genre;
 	}
 	
-	public String getISBN()
+	public int getISBN()
 	{
 		return ISBN;
 	}

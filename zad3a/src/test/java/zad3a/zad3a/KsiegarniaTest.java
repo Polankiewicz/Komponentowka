@@ -1,11 +1,16 @@
-package Zad4.Zad4;
+package zad3a.zad3a;
 
 import static org.junit.Assert.*;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.Test;
 
-public class KsiegarniaTests {
+import zad3a.zad3a.KomparatorISBN;
+import zad3a.zad3a.Ksiazka;
+import zad3a.zad3a.Ksiegarnia;
+
+public class KsiegarniaTest {
 
 	Ksiegarnia ksiegarnia;
 	
@@ -49,7 +54,7 @@ public class KsiegarniaTests {
 	@Test
 	public void testGetElement() throws Exception {
 		
-		Ksiazka ksiazka1 = new Ksiazka("Kaznodzieja", "Camilla Laeckberg", "Krymina≈Ç", 15);
+		Ksiazka ksiazka1 = new Ksiazka("Kaznodzieja", "Camilla Laeckberg", "Krymina≥", 15);
 		Ksiazka ksiazka2 = ksiegarnia.getElement(3);
 		assertEquals(ksiazka1.getTitle(), ksiazka2.getTitle());
 		assertEquals(ksiazka1.getAuthor(), ksiazka2.getAuthor());
@@ -73,10 +78,11 @@ public class KsiegarniaTests {
 	@Test
 	public void testSort() throws Exception {
 
-		ksiegarnia.print();
-		ksiegarnia.sort();
+		ksiegarnia= new Ksiegarnia();
+		//ksiegarnia.sort();
 		System.out.println();
 		ksiegarnia.print();
+		
 	}
 	
 	@Test

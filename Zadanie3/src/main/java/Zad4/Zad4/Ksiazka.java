@@ -29,7 +29,8 @@ public class Ksiazka implements Comparable<Ksiazka>
 				append("author", author).append("genre", genre).append("ISBN", ISBN).toString();
 	}
 	
-    public int compareTo(Ksiazka k) {
+    public int compareTo(Ksiazka k) 
+    {
         int porownaniAutorzy = author.compareTo(k.author);
  
         if(porownaniAutorzy == 0) {

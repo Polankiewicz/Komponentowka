@@ -1,6 +1,7 @@
 package zad3a.zad3a;
 
-//import zad3a.zadanie3a.Ksiegarnia;
+import zad3a.zad3a.KomparatorISBN;
+
 
 /**
  * Hello world!
@@ -9,11 +10,12 @@ package zad3a.zad3a;
 public class App 
 {
     public static void main( String[] args )
-    {   	
+    {   
         Ksiegarnia ksiegarnia = new Ksiegarnia();
         ksiegarnia.print();
-//        ksiegarnia.sort(new KomparatorISBN());
-        System.out.println();
-        ksiegarnia.print();       
+        
+        System.out.println();System.out.println("Sortowanie po ISBN:");
+        ksiegarnia.sort(new KomparatorISBN());
+        ksiegarnia.print();
     }
 }
