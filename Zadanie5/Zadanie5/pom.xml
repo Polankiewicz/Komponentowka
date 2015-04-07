@@ -22,8 +22,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>Zad4</groupId>
-    	<artifactId>Zad4</artifactId>
+    	<groupId>zad2</groupId>
+    	<artifactId>Zadanie2</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
