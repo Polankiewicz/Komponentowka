@@ -21,7 +21,9 @@ public class App
         
         ReadWrite.writeToTextFile("Zapisanie tekstu do pliku",  "plik.txt");
         
-        ReadWrite.writeArrayToFile(tab, "tablice.bin");
+        ReadWrite.writeArrayToFile(tab, "tablice.txt");
+        int[] tablica = ReadWrite.readArrayFromFile("tablice.txt");
+        System.out.println("odczyt tablicy: \n" + tablica);
         
     }
 }

@@ -94,26 +94,7 @@ public class ReadWrite {
 	public static int[] tablice(int rozmiar)
 	{
 		int i;
-		
-//		// Deklaracja tablicy
-//		int tab[] =new int[10];
-//		
-//		// Wypelnianie tablicy takimi samymi wartosciami
-//		for (i=1; i<10; i=i+1) 
-//			tab[i] = 5; 
-//		
-//		// Drukowanie zawartosci tablicy
-//		for (i=1; i<10; i=i+1) 
-//			System.out.print(tab[i]+" ");
-//		
-//		System.out.println("");  // wydruk pustego wiersza
-//		
-//		// Wypelnianie tablicy wartosciami zaleznymi od `i' 
-//		for (i=1; i<10; i=i+1) 
-//			tab[i] = 2*i;
-//		//  tab[i] = 5*i+3
-//		// 	tab[i] = 20 -i
-		
+			
 		
 		// Tablice o dynamicznie ustalanym rozmiarze 
 		rozmiar = 15; //
@@ -127,8 +108,7 @@ public class ReadWrite {
 		
 		System.out.println("");  
 		
-		
-		
+				
 		// Wypelnianie tablicy liczbami losowymi
 			
 		for (i=0; i< rozmiar; i++) 
@@ -138,9 +118,7 @@ public class ReadWrite {
 			System.out.print(tablica_inna[i]+" "); 
 				
 		System.out.println("");
-		
-		
-		
+			
 		for (i=0; i< rozmiar; i++) {
 			tablica_inna[i] = (int)(Math.random()*zakres);}
 		
@@ -156,6 +134,7 @@ public class ReadWrite {
 	public static void writeArrayToFile(int[] tab, String file)
 	{		
 		File plik = new File(file);
+		int[] tablica = tab;
 		
 //		int rozmiar = 0;
 		//int[] tab1;
@@ -166,7 +145,8 @@ public class ReadWrite {
 			//tab = Tablice.getTabWithRandValues(20);
 			
 			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));// Strumien zapisujacy liczby  
-			for (int i=0; i< tab.length; i++) strumienTablicy.writeInt(tab[i]); 
+			for (int i=0; i< tab.length; i++) 
+				strumienTablicy.writeInt(tab[i]); 
 			strumienTablicy.close();
 		} 
 		catch (IOException io) 
@@ -181,7 +161,7 @@ public class ReadWrite {
 	
 	public static int[] readArrayFromFile(String file)
 	{
-		int [] tablica = null;
+		int [] tablica = new int [50] ;
 		try 
 		{
 			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
