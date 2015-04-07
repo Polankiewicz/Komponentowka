@@ -16,6 +16,8 @@ import java.util.List;
 import zad2.Zadanie2.Tablice;
 
 
+
+
 public class ReadWrite {
 
 	public static void writeToTextFile(String text, String fileLocation) // dodać polskie znaki w kodowaniu i zamknięcia buffora (w catch), załamanie tekstu przy zapisie
@@ -88,6 +90,68 @@ public class ReadWrite {
 //	int i; 
 //	int rozmiar = 15; 
 //	int tab[] = new int[rozmiar];
+	
+	public static int[] tablice(int rozmiar)
+	{
+		int i;
+		
+//		// Deklaracja tablicy
+//		int tab[] =new int[10];
+//		
+//		// Wypelnianie tablicy takimi samymi wartosciami
+//		for (i=1; i<10; i=i+1) 
+//			tab[i] = 5; 
+//		
+//		// Drukowanie zawartosci tablicy
+//		for (i=1; i<10; i=i+1) 
+//			System.out.print(tab[i]+" ");
+//		
+//		System.out.println("");  // wydruk pustego wiersza
+//		
+//		// Wypelnianie tablicy wartosciami zaleznymi od `i' 
+//		for (i=1; i<10; i=i+1) 
+//			tab[i] = 2*i;
+//		//  tab[i] = 5*i+3
+//		// 	tab[i] = 20 -i
+		
+		
+		// Tablice o dynamicznie ustalanym rozmiarze 
+		rozmiar = 15; //
+		int zakres = 30;
+		int tablica_inna[] =new int[rozmiar];
+				
+		for (i=0; i< rozmiar; i++) {
+			tablica_inna[i] = 20-2*i;
+			System.out.print(tablica_inna[i]+" "); 
+		}
+		
+		System.out.println("");  
+		
+		
+		
+		// Wypelnianie tablicy liczbami losowymi
+			
+		for (i=0; i< rozmiar; i++) 
+			tablica_inna[i] = (int)(Math.random()*20);
+		
+		for (i=0; i< rozmiar; i++)
+			System.out.print(tablica_inna[i]+" "); 
+				
+		System.out.println("");
+		
+		
+		
+		for (i=0; i< rozmiar; i++) {
+			tablica_inna[i] = (int)(Math.random()*zakres);}
+		
+		for (i=0; i< rozmiar; i++)
+			System.out.print(tablica_inna[i]+" "); 
+				
+		System.out.println("");
+		return tablica_inna;
+		
+		
+	}
 	
 	public static void writeArrayToFile(int[] tab, String file)
 	{		
