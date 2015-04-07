@@ -15,7 +15,8 @@ public class App
         //System.out.println( xxx );
         
     	
-    	//int[] tab = Tablice.getTabWithRandValues(10);
+//    	int[] tab = Tablice.getTabWithRandValues(10);
+//    	System.out.println(Tablice.bubbleSort(tab));
     	
     	int[] tab = ReadWrite.tablice(15);
         
