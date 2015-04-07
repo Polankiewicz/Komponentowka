@@ -10,6 +10,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Zad4.Zad4.Ksiazka;
+import Zad4.Zad4.Ksiegarnia;
 
 public class ReadWrite {
 
@@ -41,15 +46,16 @@ public class ReadWrite {
 		String text = "";
 		
 		FileReader fileReader;
+		
 		try {
 			fileReader = new FileReader(file);
 			
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			BufferedReader bufferedReader = new BufferedReader(fileReader); 	// Konstrukcja i otwarcie strumienia odczytujacego
 			  
 			String textLine;// = bufferedReader.readLine();
 			do {
 			    		  
-			    textLine = bufferedReader.readLine();
+			    textLine = bufferedReader.readLine();  // Odczytanie znakow od 0 do 7 ze strumienia do bufora
 			    
 			    if(textLine != null)
 			    	text += textLine + "\n";
@@ -72,11 +78,18 @@ public class ReadWrite {
 		
 	}
 	
+	
+	
 	public static void writeArrayToFile(int[] tab, String file)
-	{
+	{		
+		
+		Ksiegarnia ksiegarnia.ksiegarnia.print();
+		
+		
 		try { 
 			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));// Strumien zapisujacy liczby  
 			for (int i=0; i< tab.length; i++) strumienTablicy.writeInt(tab[i]); 
+			strumienTablicy.close();
 		} 
 		catch (IOException io) {
 			System.out.println(io.getMessage());
@@ -86,12 +99,13 @@ public class ReadWrite {
 		}
 	}
 	
-	public static String readArrayFromFile(String file)
+	public static int[] readArrayFromFile(String file)
 	{
 		int [] tab;
 		try {
 			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
 			for (int i=0; i< rozmiar; i++) tab[i] = strumienTablicaZPliku.readInt();
+			strumienTablicaZPliku.close();
 		} 
 		catch (FileNotFoundException io) {
 			System.out.println(io.getMessage());
