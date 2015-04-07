@@ -72,35 +72,35 @@ public class ReadWrite {
 		
 	}
 	
-//	public static void writeTabToFile(int[] tab, String file)
-//	{
-//		try { 
-//			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));// Strumien zapisujacy liczby  
-//			for (int i=0; i< tab.length; i++) strumienTablicy.writeInt(tab[i]); 
-//		} 
-//		catch (IOException io) {
-//			System.out.println(io.getMessage());
-//		} 
-//		catch (Exception se) {
-//			System.err.println("blad sec");
-//		}
-//	}
+	public static void writeArrayToFile(int[] tab, String file)
+	{
+		try { 
+			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));// Strumien zapisujacy liczby  
+			for (int i=0; i< tab.length; i++) strumienTablicy.writeInt(tab[i]); 
+		} 
+		catch (IOException io) {
+			System.out.println(io.getMessage());
+		} 
+		catch (Exception se) {
+			System.err.println("blad sec");
+		}
+	}
 	
-//	public static String readTabFromFile(String file)
-//	{
-//		int [] tab;
-//		try {
-//			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
-//			for (int i=0; i< rozmiar; i++) tab[i] = strumienTablicaZPliku.readInt();
-//		} 
-//		catch (FileNotFoundException io) {
-//			System.out.println(io.getMessage());
-//		} 
-//		catch (IOException io) {
-//			System.out.println(io.getMessage());
-//		}
-//		return tab;
-//	}
+	public static String readArrayFromFile(String file)
+	{
+		int [] tab;
+		try {
+			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
+			for (int i=0; i< rozmiar; i++) tab[i] = strumienTablicaZPliku.readInt();
+		} 
+		catch (FileNotFoundException io) {
+			System.out.println(io.getMessage());
+		} 
+		catch (IOException io) {
+			System.out.println(io.getMessage());
+		}
+		return tab;
+	}
 	
 	
 }
