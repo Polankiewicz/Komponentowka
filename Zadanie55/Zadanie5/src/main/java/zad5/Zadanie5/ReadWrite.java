@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 //import zad2.Zadanie2.Tablice;
 
@@ -19,8 +20,10 @@ import java.util.List;
 
 
 public class ReadWrite {
+	
+	private static Logger log = Logger.getLogger(ReadWrite.class.getName());
 
-	public static void writeToTextFile(String text, String fileLocation) // dodać polskie znaki w kodowaniu i zamknięcia buffora (w catch), załamanie tekstu przy zapisie
+	public static void writeToTextFile(String text, String fileLocation) 
 	{
 		File plik = new File(fileLocation);
 		FileWriter strumienZapisu = null;
@@ -32,29 +35,26 @@ public class ReadWrite {
 			strumienZapisu.write(text);		// Zapis do pliku, (tekstDoZapisania, int, int) - inty okreslaja ilosc znakow, ktore zostana zapisane
 			
 		}
-
-		catch (IOException io)												
+		catch (IOException e)												
 		{
-			System.out.println(io.getMessage());
+			log.info("IOException");
 		}
-
-		catch (Exception se)
+		catch (Exception e)
 		{
-			System.err.println("blad sec");
+			log.info("Exception");
 		}
-		
-		finally
+		finally // ??????????????????????????
 		{
 			try {
-				strumienZapisu.close();
+				strumienZapisu.close(); 	// Zamkniecie strumienia
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 				// Zamkniecie strumienia
+			}
 		}
 	}
 	
-	public static String readFromTextFile(String file) // dodać polskie znaki w kodowaniu i zamknięcia buffora (w catch)
+	public static String readFromTextFile(String file) 
 	{
 		
 		String text = "";
@@ -67,11 +67,10 @@ public class ReadWrite {
 			
 			BufferedReader bufferedReader = new BufferedReader(fileReader); 	// Konstrukcja i otwarcie strumienia odczytujacego
 			  
-			String textLine;// = bufferedReader.readLine();
+			String textLine;
 			do 
-			{
-			    		  
-			    textLine = bufferedReader.readLine();  // Odczytanie znakow od 0 do 7 ze strumienia do bufora
+			{	  
+			    textLine = bufferedReader.readLine();
 			    
 			    if(textLine != null)
 			    	text += textLine + "\n";
@@ -79,15 +78,14 @@ public class ReadWrite {
 			} while(textLine != null);
 
 			bufferedReader.close();
-			
 		} 
 		catch (FileNotFoundException e) 
 		{
-			e.printStackTrace();
+			log.info("FileNotFoundException");
 		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			log.info("IOException");
 		}
 		  
 		return text;
@@ -146,11 +144,11 @@ public class ReadWrite {
 		} 
 		catch (IOException io) 
 		{
-			System.out.println(io.getMessage());
+			log.info("IOException");
 		} 
 		catch (Exception se) 
 		{
-			System.err.println("blad sec");
+			log.info("FileNotFoundException");
 		}
 	}
 	
@@ -160,7 +158,6 @@ public class ReadWrite {
 		try 
 		{
 			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
-			
 			
 			for (int i=0; i< tablica.length; i++) 
 			{
@@ -172,11 +169,11 @@ public class ReadWrite {
 		} 
 		catch (FileNotFoundException io) 
 		{
-			System.out.println(io.getMessage());
+			log.info("FileNotFoundException");
 		} 
 		catch (IOException io) 
 		{
-			System.out.println(io.getMessage());
+			log.info("IOException");
 		}
 		return tablica;
 	}

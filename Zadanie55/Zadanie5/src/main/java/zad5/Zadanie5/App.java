@@ -10,7 +10,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        ReadWrite.writeToTextFile("Zapisanie tekstu do pliku \n kk 3 d",  "plik.txt");
+        ReadWrite.writeToTextFile("Zapisanie tekstu do pliku \n ęóąśłżźćń",  "plik.txt");
         System.out.println(ReadWrite.readFromTextFile("plik.txt"));
         
         int[] tab =  {4, 7, 8, 6, 76, 94, 67, 23, 13, 45};
