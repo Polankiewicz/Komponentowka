@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Ksiegarnia implements KsiazkaDao {
 	
-	List<Ksiazka> ksiazki;
+	private List<Ksiazka> ksiazki = new ArrayList <Ksiazka>();;
 	
 	public Ksiegarnia(){
-		ksiazki = new ArrayList <Ksiazka>();
+				
 		Ksiazka ksiazka1 = new Ksiazka("Księżniczka z lodu", "Camilla Laeckberg", "Kryminał", 0);
 		Ksiazka ksiazka2 = new Ksiazka("Kamieniarz", "Camilla Laeckberg", "Kryminał", 1);
 		Ksiazka ksiazka3 = new Ksiazka("Niemiecki bękart", "Camilla Laeckberg", "Kryminał", 2);
@@ -34,7 +34,7 @@ public class Ksiegarnia implements KsiazkaDao {
 		ksiazki.add(ksiazka11);
 		
 	}
-
+	
 	public List<Ksiazka> getAllBooks() {
 		return ksiazki;
 	}

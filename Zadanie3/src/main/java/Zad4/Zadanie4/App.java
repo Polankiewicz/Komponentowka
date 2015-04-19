@@ -1,6 +1,6 @@
-package Zad4.Zad4;
+package Zad4.Zadanie4;
 
-import Zad4.Zad4.Ksiegarnia;
+import Zad4.Zadanie4.Ksiegarnia;
 
 /**
  * Hello world!

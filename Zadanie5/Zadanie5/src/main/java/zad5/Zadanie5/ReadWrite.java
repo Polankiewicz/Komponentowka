@@ -1,5 +1,7 @@
 package zad5.Zadanie5;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,8 +12,16 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import zad2.Zadanie2.Tablice;
 
@@ -37,12 +47,14 @@ public class ReadWrite {
 
 		catch (IOException io)												
 		{
-			System.out.println(io.getMessage());
+			//System.out.println(io.getMessage());
+			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O" + tekstDoZapisania, io);
 		}
 
 		catch (Exception se)
 		{
-			System.err.println("blad sec");
+			//System.err.println("blad sec");
+			Logger.getLogger("default2").log(Level.SEVERE, "Błąd sec" + tekstDoZapisania, se);
 		}
 	}
 	
@@ -73,13 +85,15 @@ public class ReadWrite {
 			bufferedReader.close();
 			
 		} 
-		catch (FileNotFoundException e) 
+		catch (FileNotFoundException fexc) 
 		{
-			e.printStackTrace();
+			fexc.printStackTrace();
+			Logger.getLogger("default3").log(Level.SEVERE, "Błąd sec" + text, fexc);
 		}
-		catch (IOException e) 
+		catch (IOException iexc) 
 		{
-			e.printStackTrace();
+			iexc.printStackTrace();
+			Logger.getLogger("default4").log(Level.SEVERE, "Błąd sec" + text, iexc);
 		}
 		  
 		return text;
@@ -139,12 +153,13 @@ public class ReadWrite {
 //		int rozmiar = 0;
 		//int[] tab1;
 			
-		
+		Charset charset = Charset.forName("UTF-8");
 		try 
 		{ 
 			//tab = Tablice.getTabWithRandValues(20);
 			
-			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));// Strumien zapisujacy liczby  
+			DataOutputStream strumienTablicy = new DataOutputStream(new BufferedOutputStream(
+		              new FileOutputStream(file)));// Strumien zapisujacy liczby  
 			for (int i=0; i< tab.length; i++) 
 				strumienTablicy.writeInt(tab[i]); 
 			strumienTablicy.close();
@@ -152,32 +167,44 @@ public class ReadWrite {
 		catch (IOException io) 
 		{
 			System.out.println(io.getMessage());
+			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O" + charset, io);
 		} 
 		catch (Exception se) 
 		{
 			System.err.println("blad sec");
+			Logger.getLogger("default").log(Level.SEVERE, "Błąd sec" + charset, se);
+			
 		}
 	}
 	
 	public static int[] readArrayFromFile(String file)
 	{
 		int [] tablica = new int [50] ;
+		Scanner s = null;
+		
 		try 
 		{
-			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
-			for (int i=0; i< tablica.length; i++) tablica[i] = strumienTablicaZPliku.readInt();
+			
+            
+			DataInputStream strumienTablicaZPliku = new DataInputStream(new BufferedInputStream(new FileInputStream(file))); 
+			for (int i=0; i< tablica.length; i++) 
+				tablica[i] = strumienTablicaZPliku.readInt();
 			
 			
 			strumienTablicaZPliku.close();
-		} 
-		catch (FileNotFoundException io) 
+		
+			} 
+		catch (FileNotFoundException fnex) 
 		{
-			System.out.println(io.getMessage());
+			System.out.println(fnex.getMessage());
+			Logger.getLogger("default").log(Level.INFO, "Błąd pliku" + tablica, fnex);
 		} 
 		catch (IOException io) 
 		{
 			System.out.println(io.getMessage());
+			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O" + tablica, io);
 		}
 		return tablica;
 	}
+	
 }

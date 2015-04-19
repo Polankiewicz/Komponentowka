@@ -1,4 +1,4 @@
-package Zad4.Zad4;
+package Zad4.Zadanie4;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +22,30 @@ public class Ksiegarnia {
 		ksiazki.add(new Ksiazka("Pogromca lwów", "Camilla Laeckberg", "Kryminał", 156));
 		ksiazki.add(new Ksiazka("Czerwony krąg", "Brandon Webb", "Biografia", 125));
 		ksiazki.add(new Ksiazka("Boże igrzysko", "Norman Davis", "Historyczna", 97));
+		
+/*		Ksiazka ksiazka1 = new Ksiazka("Księżniczka z lodu", "Camilla Laeckberg", "Kryminał", 10);
+		Ksiazka ksiazka2 = new Ksiazka("Kamieniarz", "Camilla Laeckberg", "Kryminał", 11);
+		Ksiazka ksiazka3 = new Ksiazka("Niemiecki bękart", "Camilla Laeckberg", "Kryminał", 97);
+		Ksiazka ksiazka4 = new Ksiazka("Kaznodzieja", "Camilla Laeckberg", "Kryminał", 15);
+		Ksiazka ksiazka5 = new Ksiazka("Ofiara losu", "Camilla Laeckberg", "Kryminał", 125);
+		Ksiazka ksiazka6 = new Ksiazka("Latarnik", "Camilla Laeckberg", "Kryminał", 5);
+		Ksiazka ksiazka7 = new Ksiazka("Smaki z Fjaellbacki", "Camilla Laeckberg", "Kryminał", 165);
+		Ksiazka ksiazka8 = new Ksiazka("Biesiada, jedzenie i miłość", "Camilla Laeckberg", "Kryminał", 2);
+		Ksiazka ksiazka9 = new Ksiazka("Pogromca lwów", "Camilla Laeckberg", "Kryminał", 33);
+		Ksiazka ksiazka10 = new Ksiazka("Czerwony krąg", "Brandon Webb", "Biografia", 19);
+		Ksiazka ksiazka11 = new Ksiazka("Boże igrzysko", "Norman Davis", "Historyczna", 12);
+		
+		ksiazki.add(ksiazka1);
+		ksiazki.add(ksiazka2);
+		ksiazki.add(ksiazka3);
+		ksiazki.add(ksiazka4);
+		ksiazki.add(ksiazka5);
+		ksiazki.add(ksiazka6);
+		ksiazki.add(ksiazka7);
+		ksiazki.add(ksiazka8);
+		ksiazki.add(ksiazka9);
+		ksiazki.add(ksiazka10);
+		ksiazki.add(ksiazka11);*/
 	}
 	
 	public void appendElement(String tytul, String autor, String gatunek, int ISBN)

@@ -1,4 +1,4 @@
-package Zad4.Zad4;
+package Zad4.Zadanie4;
 
 import static org.junit.Assert.*;
 
