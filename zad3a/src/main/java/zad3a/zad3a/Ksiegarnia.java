@@ -27,7 +27,6 @@ public class Ksiegarnia {
 		ksiazki[8] = new Ksiazka("Pogromca lwów", "Camilla Laeckberg", "Krymina³", 156);
 		ksiazki[9] = new Ksiazka("Czerwony kr¹g", "Brandon Webb", "Biografia", 125);
 		ksiazki[10] = new Ksiazka("Bo¿e igrzysko", "Norman Davis", "Historyczna", 97);
-    	
 	}
 	
 	public void appendElement(String tytul, String autor, String gatunek, int ISBN)

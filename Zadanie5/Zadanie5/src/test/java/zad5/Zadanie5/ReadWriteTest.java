@@ -1,0 +1,14 @@
+package zad5.Zadanie5;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ReadWriteTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}
