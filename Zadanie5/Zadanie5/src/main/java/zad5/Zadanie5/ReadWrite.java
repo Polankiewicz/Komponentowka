@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import zad2.Zadanie2.Tablice;
+
 public class ReadWrite {
 
 	private static Logger logger = Logger.getLogger(ReadWrite.class.getName());
@@ -83,7 +85,15 @@ public class ReadWrite {
 				System.out.println("Tablica z pliku: " + tablica[i] + " ");
 			}
 			System.out.println();
-			Arrays.sort(tablica);
+			
+			//Arrays.sort(tablica);
+			
+			///////////
+			Tablice.bubbleSort(tablica);
+			
+			
+			//////////
+			
 			for (int i = 0; i < k; i++)
 			{
 				System.out.println("Tablica z pliku: " + tablica[i] + " ");
