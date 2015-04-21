@@ -14,6 +14,10 @@ public class App
         Ksiegarnia ksiegarnia = new Ksiegarnia();
         ksiegarnia.print();
         
+        System.out.println();System.out.println("Sortowanie:");
+        ksiegarnia.sort();
+        ksiegarnia.print();
+        
         System.out.println();System.out.println("Sortowanie po ISBN:");
         ksiegarnia.sort(new KomparatorISBN());
         ksiegarnia.print();
