@@ -1,10 +1,8 @@
 package zad5.Zadanie5;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -67,82 +65,31 @@ public class ReadWrite {
 	}
 
 	public static int[] readArrayFromFile(String file) {
-		
 
-//		RandomAccessFile raf = new RandomAccessFile(file, "rw");
-//		rozm = raf.length();
-//
-//		Integer k = (int) (long) rozm;
-//
-//		int[] tablica = new int[k];
-
-		// to trzeba poprawic, tymczasowy rozmiar!!!
-		// tablica o znacznie wiekszym rozmiarze niż potrzebny jest brzydka :P
-		// no i przy obecnym kodzie bedzie wywalać błędy bo odczytujemy ze
-		// strumienia coś co nie istnieje
-
-//		try (
-//				DataInputStream strumienTablicaZPliku = new DataInputStream(
-//				new FileInputStream(file))) {
-//			for (int i = 0; i < tablica.length; i++)
-//				tablica[i] = strumienTablicaZPliku.readInt();
-//		} catch (FileNotFoundException io) {
-//			logger.log(Level.INFO, "Błąd pliku", io);
-//		} catch (IOException io) {
-//			logger.log(Level.INFO, "Wyjątek I/O", io);
-//		}
-
-		// return tablica;
-
-		RandomAccessFile fis = null;
 		int []tablica = null;
 		
 		// OTWIERANIE PLIKU:
-		try 
+		try (RandomAccessFile fis = new RandomAccessFile(file, "rw");)
 		{
-			fis = new RandomAccessFile(file, "rw");
-		} 
-		catch (FileNotFoundException e) 
-		{
-			System.out.println("BŁĄD!!! Nie znaleziono pliku...");
-			System.exit(1);
-		}
-		
-		
-		long rozm;
-		
-		//ODCZYT
-		try 
-		{
-			rozm = fis.length();
-			
-			Integer k = (int) (long) rozm / 4;
+			Integer k = (int) (long) fis.length() / 4;
 			
 			tablica = new int[k];
 			
+			//SCZYTYWANIE
 			for (int i = 0; i < k; i++)
 			{
 				tablica[i] = fis.readInt();
 				System.out.println("Tablica z pliku: " + tablica[i] + " ");
 			}
+			
+			//ZAMKNIECIE
+			fis.close();
 		} 
 		catch (FileNotFoundException io) {
 			logger.log(Level.INFO, "Błąd pliku", io);
 		} catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O", io);
 		}
-		
-		
-		// ZAMYKANIE PLIKU:
-		try 
-		{
-			fis.close();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
 		return tablica;
 	}
 }
