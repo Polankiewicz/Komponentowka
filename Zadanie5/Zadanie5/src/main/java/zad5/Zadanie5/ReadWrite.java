@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 
 public class ReadWrite {
 
+	private static Logger logger = Logger.getLogger(ReadWrite.class.getName());
+	
 	public static void writeToTextFile(String text, String fileLocation)
 	{
 		File plik = new File(fileLocation);
@@ -30,11 +32,11 @@ public class ReadWrite {
 		}
 		catch (IOException io)
 		{
-			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O ", io);
+			logger.log(Level.INFO, "Wyjątek I/O ", io);
 		}
 		catch (Exception se)
 		{
-			Logger.getLogger("default2").log(Level.SEVERE, "Błąd sec ", se);
+			logger.log(Level.INFO, "Błąd sec ", se);
 		}
 	}
 	
@@ -60,13 +62,13 @@ public class ReadWrite {
 
 			bufferedReader.close();
 		} 
-		catch (FileNotFoundException fexc) 
+		catch (FileNotFoundException io) 
 		{
-			Logger.getLogger("default3").log(Level.SEVERE, "Błąd sec", fexc);
+			logger.log(Level.INFO, "Błąd sec", io);
 		}
-		catch (IOException iexc) 
+		catch (IOException io) 
 		{
-			Logger.getLogger("default4").log(Level.SEVERE, "Błąd sec", iexc);
+			logger.log(Level.INFO, "Błąd sec", io);
 		}
 		  
 		return text;
@@ -85,11 +87,11 @@ public class ReadWrite {
 		} 
 		catch (IOException io) 
 		{
-			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O" , io);
+			logger.log(Level.INFO, "Wyjątek I/O" , io);
 		} 
 		catch (Exception se) 
 		{
-			Logger.getLogger("default").log(Level.SEVERE, "Błąd sec" , se);
+			logger.log(Level.INFO, "Błąd sec" , se);
 		}
 	}
 	
@@ -108,13 +110,13 @@ public class ReadWrite {
 			
 			strumienTablicaZPliku.close();
 		} 
-		catch (FileNotFoundException fnex) 
+		catch (FileNotFoundException io) 
 		{
-			Logger.getLogger("default").log(Level.INFO, "Błąd pliku", fnex);
+			logger.log(Level.INFO, "Błąd pliku", io);
 		} 
 		catch (IOException io) 
 		{
-			Logger.getLogger("default").log(Level.INFO, "Wyjątek I/O", io);
+			logger.log(Level.INFO, "Wyjątek I/O", io);
 		}
 		
 		return tablica;
