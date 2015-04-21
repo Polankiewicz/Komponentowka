@@ -21,14 +21,11 @@ public class ReadWrite {
 	public static void writeToTextFile(String text, String fileLocation)
 	{
 		File plik = new File(fileLocation);
-		String tekstDoZapisania = text;
 
-		try	
+		try	(FileWriter strumienZapisu = new FileWriter(plik))
 		{
 			plik.createNewFile();
-			FileWriter strumienZapisu = new FileWriter(plik);
-			strumienZapisu.write(tekstDoZapisania);
-			strumienZapisu.close();
+			strumienZapisu.write(text);
 		}
 		catch (IOException io)
 		{
@@ -43,12 +40,10 @@ public class ReadWrite {
 	public static String readFromTextFile(String file)
 	{
 		String text = "";
-		FileReader fileReader;
 		
-		try
+		try (FileReader fileReader = new FileReader(file); 
+				BufferedReader bufferedReader = new BufferedReader(fileReader))
 		{
-			fileReader = new FileReader(file);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String textLine;
 			
 			do 
@@ -60,7 +55,6 @@ public class ReadWrite {
 			} 
 			while(textLine != null);
 
-			bufferedReader.close();
 		} 
 		catch (FileNotFoundException io) 
 		{
@@ -76,14 +70,10 @@ public class ReadWrite {
 	
 	public static void writeArrayToFile(int[] tab, String file)
 	{			
-		try 
+		try (DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file)))
 		{ 
-			DataOutputStream strumienTablicy = new DataOutputStream(new FileOutputStream(file));
-			
 			for (int i=0; i< tab.length; i++) 
-				strumienTablicy.writeInt(tab[i]); 
-			
-			strumienTablicy.close();
+				strumienTablicy.writeInt(tab[i]); 			
 		} 
 		catch (IOException io) 
 		{
@@ -101,14 +91,10 @@ public class ReadWrite {
 		// tablica o znacznie wiekszym rozmiarze niż potrzebny jest brzydka :P
 		// no i przy obecnym kodzie bedzie wywalać błędy bo odczytujemy ze strumienia coś co nie istnieje
 		
-		try 
+		try (DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)))
 		{
-			DataInputStream strumienTablicaZPliku = new DataInputStream(new FileInputStream(file)); 
-			
 			for (int i=0; i< tablica.length; i++) 
 				tablica[i] = strumienTablicaZPliku.readInt();
-			
-			strumienTablicaZPliku.close();
 		} 
 		catch (FileNotFoundException io) 
 		{
