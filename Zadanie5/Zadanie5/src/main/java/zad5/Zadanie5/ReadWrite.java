@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,6 +80,12 @@ public class ReadWrite {
 			for (int i = 0; i < k; i++)
 			{
 				tablica[i] = fis.readInt();
+				System.out.println("Tablica z pliku: " + tablica[i] + " ");
+			}
+			System.out.println();
+			Arrays.sort(tablica);
+			for (int i = 0; i < k; i++)
+			{
 				System.out.println("Tablica z pliku: " + tablica[i] + " ");
 			}
 			
