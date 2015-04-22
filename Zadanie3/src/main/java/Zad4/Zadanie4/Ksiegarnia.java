@@ -24,6 +24,11 @@ public class Ksiegarnia {
 		ksiazki.add(new Ksiazka("Boże igrzysko", "Norman Davis", "Historyczna", 97));
 	}
 	
+	public List<Ksiazka> getList()
+	{
+		return ksiazki;
+	}
+	
 	public void appendElement(String tytul, String autor, String gatunek, int ISBN)
 	{
 		ksiazki.add(new Ksiazka(tytul, autor, gatunek, ISBN));
