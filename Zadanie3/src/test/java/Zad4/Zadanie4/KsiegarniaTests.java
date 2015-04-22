@@ -72,15 +72,6 @@ public class KsiegarniaTests {
 				ksiegarnia.getElement(15);
 	}
 	
-//	@Test
-//	public void testSort() throws Exception {
-//
-//		ksiegarnia.print();
-//		ksiegarnia.sort();
-//		System.out.println();
-//		ksiegarnia.print();
-//	}
-	
 	@Test
 	public void testSortComparator() throws Exception {
 
@@ -89,14 +80,12 @@ public class KsiegarniaTests {
 		System.out.println();
 		ksiegarnia.print();
 		
-		//int sud = 0;
+		
 		for(int i=0; i < ksiegarnia.size()-1; i++)
 		{
 			if(ksiegarnia.getElement(i).getISBN() < ksiegarnia.getElement(i+1).getISBN()){}
-			else System.out.println("Błąd sortowania przy użyciu komparatora");
-				//sud++;
+			else System.out.println("Błąd w sortowaniu za pomocą komparatora");
 		}
-		//assertEquals(10, sud);
 	}
 
 }

@@ -13,9 +13,11 @@ public class App
         System.out.println(ReadWrite.readFromTextFile("plik.txt"));
         
         int[] tab =  Tablice.getTabWithRandValues(12);
-        System.out.println(Arrays.toString(tab)); // sie wywali potem
+        System.out.println(Arrays.toString(tab));
         ReadWrite.writeArrayToFile(tab, "tablice.bin");
-        ReadWrite.readArrayFromFile("tablice.bin");
         
+        int[] tab2 = ReadWrite.readArrayFromFile("tablice.bin");
+        Tablice.bubbleSort(tab2);
+        System.out.println(Arrays.toString(tab2));
     }
 }

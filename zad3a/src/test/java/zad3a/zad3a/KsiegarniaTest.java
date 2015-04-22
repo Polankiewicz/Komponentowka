@@ -5,10 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import zad3a.zad3a.KomparatorISBN;
-import zad3a.zad3a.Ksiazka;
-import zad3a.zad3a.Ksiegarnia;
-
 public class KsiegarniaTest {
 
 	Ksiegarnia ksiegarnia;
@@ -75,25 +71,6 @@ public class KsiegarniaTest {
 		//Ksiazka ksiazka = 
 				ksiegarnia.getElement(15);
 	}
-	
-//	@Test
-//	public void testSort() throws Exception {
-//
-//		ksiegarnia= new Ksiegarnia();
-//		ksiegarnia.sort();
-//		
-//		//int sud = 0;
-//		for(int i=0; i < ksiegarnia.size()-1; i++)
-//		{
-//			
-//			if((Integer.parseInt(ksiegarnia.getElement(i).getAuthor())) <= (Integer.parseInt(ksiegarnia.getElement(i+1).getAuthor()))){}
-//			else System.out.println("¯le posortowane ksiazki");
-//		}
-//		
-//		//System.out.println();
-//		//ksiegarnia.print();
-//		
-//	}
 	
 	@Test
 	public void testSortComparator() throws Exception {

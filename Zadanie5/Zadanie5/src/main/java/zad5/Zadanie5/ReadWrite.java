@@ -25,9 +25,11 @@ public class ReadWrite {
 		try (FileWriter strumienZapisu = new FileWriter(plik)) {
 			plik.createNewFile();
 			strumienZapisu.write(text);
-		} catch (IOException io) {
+		} 
+		catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O ", io);
-		} catch (Exception se) {
+		} 
+		catch (Exception se) {
 			logger.log(Level.INFO, "Błąd sec ", se);
 		}
 	}
@@ -44,11 +46,14 @@ public class ReadWrite {
 
 				if (textLine != null)
 					text += textLine + "\n";
-			} while (textLine != null);
+			} 
+			while (textLine != null);
 
-		} catch (FileNotFoundException io) {
+		} 
+		catch (FileNotFoundException io) {
 			logger.log(Level.INFO, "Błąd sec", io);
-		} catch (IOException io) {
+		} 
+		catch (IOException io) {
 			logger.log(Level.INFO, "Błąd sec", io);
 		}
 
@@ -60,9 +65,11 @@ public class ReadWrite {
 				new FileOutputStream(file))) {
 			for (int i = 0; i < tab.length; i++)
 				strumienTablicy.writeInt(tab[i]);
-		} catch (IOException io) {
+		} 
+		catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O", io);
-		} catch (Exception se) {
+		} 
+		catch (Exception se) {
 			logger.log(Level.INFO, "Błąd sec", se);
 		}
 	}
@@ -71,42 +78,21 @@ public class ReadWrite {
 
 		int []tablica = null;
 		
-		// OTWIERANIE PLIKU:
 		try (RandomAccessFile fis = new RandomAccessFile(file, "rw");)
 		{
-			Integer k = (int) (long) fis.length() / 4;
+			Integer tabSize = (int) (long) fis.length() / 4;
+			tablica = new int[tabSize];
 			
-			tablica = new int[k];
-			
-			//SCZYTYWANIE
-			for (int i = 0; i < k; i++)
-			{
+			for (int i = 0; i < tabSize; i++)
 				tablica[i] = fis.readInt();
-				System.out.println("Tablica z pliku: " + tablica[i] + " ");
-			}
-			System.out.println();
-			
-			//Arrays.sort(tablica);
-			
-			///////////
-			Tablice.bubbleSort(tablica);
-			
-			
-			//////////
-			
-			for (int i = 0; i < k; i++)
-			{
-				System.out.println("Tablica z pliku: " + tablica[i] + " ");
-			}
-			
-			//ZAMKNIECIE
-			fis.close();
 		} 
 		catch (FileNotFoundException io) {
 			logger.log(Level.INFO, "Błąd pliku", io);
-		} catch (IOException io) {
+		} 
+		catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O", io);
 		}
+		
 		return tablica;
 	}
 }
