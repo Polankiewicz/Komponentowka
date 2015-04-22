@@ -18,7 +18,7 @@ import Zad4.Zadanie4.Ksiegarnia;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws CloneNotSupportedException
     {
     	Ksiegarnia ksiegarnia = new Ksiegarnia();
     	List<Ksiazka> listaKsiazek = new ArrayList<Ksiazka>();
@@ -31,5 +31,10 @@ public class App
     	listaKsiazek2 = bookDaoImpl.readListFromFile("plik.txt");
     	bookDaoImpl.printList(listaKsiazek2);
     	
+    	Ksiazka ksiazka1 = new Ksiazka("", "", "", 0);
+    	Ksiazka ksiazka2 = (Ksiazka) ksiazka1.clone();
+    	
+    	MyExceptions myExceptions = new MyExceptions();
+    	myExceptions.testExceptions();
     }
 }

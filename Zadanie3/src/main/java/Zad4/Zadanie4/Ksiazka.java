@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * Hello world!
  *
  */
-public class Ksiazka implements Comparable<Ksiazka>
+public class Ksiazka implements Comparable<Ksiazka>, Cloneable
 {
 	private String title;
 	private String author;
@@ -14,6 +14,12 @@ public class Ksiazka implements Comparable<Ksiazka>
 	private int ISBN;
 	
 	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	public Ksiazka(String title, String author, String genre, int ISBN)
 	{
 		this.title=title;
