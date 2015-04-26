@@ -18,13 +18,6 @@ public class AppTest
     extends TestCase
 {
 	
-	@Test
-	public void test() {
-    	Ksiazka ksiazka1 = new Ksiazka("", "", "", 0);
-    	Ksiazka ksiazka2 = (Ksiazka) ksiazka1.clone();
-		assertEquals(ksiazka1, ksiazka2);
-	}
-	
     /**
      * Create the test case
      *

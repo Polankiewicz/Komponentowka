@@ -1,5 +1,6 @@
-package Zad4.Zadanie4;
+package zad6.Zadanie6;
 
+import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -7,13 +8,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * Hello world!
  *
  */
-public class Ksiazka implements Comparable<Ksiazka>, Cloneable
+public class Ksiazka implements Comparable<Ksiazka>, Cloneable, Serializable
 {
 	private String title;
 	private String author;
 	private String genre;
 	private int ISBN;
 	
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	public Ksiazka(String title, String author, String genre, int ISBN)
 	{
 		this.title=title;

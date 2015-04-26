@@ -36,6 +36,13 @@ public class Ksiegarnia {
 		ksiazki[size] = new Ksiazka(tytul, autor, gatunek, ISBN);
 	}
 	
+	public void appendElement(Ksiazka ksiazka)
+	{
+		int size = ksiazki.length;
+		ksiazki = Arrays.copyOf(ksiazki, size + 1);
+		ksiazki[size] = ksiazka;
+	}
+	
 	public void removeElement(int x) throws Exception
 	{
 		if(x < 0 || x >= ksiazki.length) throw new Exception();
