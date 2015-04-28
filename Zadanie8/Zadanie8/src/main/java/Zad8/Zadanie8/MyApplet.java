@@ -67,7 +67,7 @@ public class MyApplet extends Applet implements ActionListener, ItemListener
 					
 							
 			// Pobiera obrazek z pliku i wyswietla go w podanym prostokacie 
-			Image image = getImage(getCodeBase(), "welcome.jpg");  
+			Image image = getImage(getCodeBase(), "http://ics.p.lodz.pl/~aniewiadomski/mijp/applets/welcome.jpg");  
 			g.drawImage(image, 220, 350, 250, 100, this);
 					
 					
