@@ -10,6 +10,14 @@ class MyException extends Exception
 	}
 }
 
+class MyRunetimeException extends RuntimeException
+{
+	public MyRunetimeException() {}
+	public MyRunetimeException(String msg)
+	{
+		super(msg);
+	}
+}
 
 
 
@@ -17,8 +25,14 @@ public class MyExceptions {
 
 	public void myExceptionMethod() throws MyException
 	{
-		throw new MyException("wyjatek w metodzie xxx");
+		throw new MyException("wyjatek w metodzie myExceptionMethod()");
 	}
+	
+	public void myRunetimeExceptionMethod()
+	{
+		throw new MyRunetimeException("wyjatek w metodzie MyRunetimeException()");
+	}
+	
 	
 	public void testExceptions()
 	{
@@ -29,78 +43,19 @@ public class MyExceptions {
 			e.printStackTrace();
 		}
 		
+		myRunetimeExceptionMethod();
+		
+		
+//		//tutaj jeszcze pomyślę czy to jest potrzebne/istotne :P
+//		try {
+//			int []x = new int[2];
+//			x[3] = 4;
+//		} 
+//		catch (IndexOutOfBoundsException e) {
+//			throw new MyRunetimeException("wyjatek MyRunetimeException");
+//		}
 		
 		
 	}
 	
 }
-
-/*
- * 
- * 
- * package zad6.Zadanie6;
-
-
-class MyException extends Exception
-{
-	public MyException() {
-		
-		System.out.println("Utworzenie wyjątku.");
-	}
-	public MyException(String msg)
-	{
-		super(msg);
-	}
-}
-
-
-public class MyExceptions {
-
-	public void myExceptionMethod() throws MyException
-	{
-		System.out.println("Zgłoszenie wyjątku MyException");
-		throw new MyException();
-	}
-	
-	public static void testExceptions(String[] args)
-	{
-		MyExceptions sample = new MyExceptions();
-		try {
-			sample.myExceptionMethod();
-		} catch (MyException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Wyjątek przechwycony");
-			e.printStackTrace();
-		}		
-	}
-}
-
-
-//public class MyException2 extends Exception
-//{
-//	private int x;
-//	public MyException2(){}
-//	
-//	public MyException2(String message)
-//	{
-//		super(message);
-//	}
-//	
-//	public MyException2(String message, int x)
-//	{
-//		super(message);
-//		this.x = x;
-//	}
-//	
-//	public int value()
-//	{
-//		return x;
-//	}
-//	
-//	public String getMessage()
-//	{
-//		return "Komunikat szczegółowy: " + x + " " + super.getMessage();
-//	}
-//}
- * 
- * */
