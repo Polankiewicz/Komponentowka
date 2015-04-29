@@ -66,12 +66,16 @@ public class ReadWrite {
 			for (int i = 0; i < tab.length; i++)
 				strumienTablicy.writeInt(tab[i]);
 		} 
+		catch (FileNotFoundException fnf){
+			logger.log(Level.INFO, "Plik nie znaleziony", fnf);
+		}
 		catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O", io);
-		} 
+		}		
 		catch (Exception se) {
 			logger.log(Level.INFO, "Błąd sec", se);
 		}
+		
 	}
 
 	public static int[] readArrayFromFile(String file) {
