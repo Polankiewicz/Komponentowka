@@ -5,13 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import zad6.Zadanie6.exceptions.MyRunetimeException;
 
 
-public class BookDaoImpl implements BookDao {
-
-	private static Logger logger = Logger.getLogger(BookDaoImpl.class.getName());
+public class BookDaoImpl implements BookDao 
+{
 	
 	public void writeListToFile(Ksiegarnia ksiegarnia, String file) {
 		// TODO Auto-generated method stub
@@ -23,7 +22,7 @@ public class BookDaoImpl implements BookDao {
 	    } 
 	    catch (IOException i) 
 	    {
-	    	logger.log(Level.INFO, "IOException ", i);
+	    	throw new MyRunetimeException("wyjatek IOException w metodzie writeListToFile()", i);
 	    }
 		
 	}
@@ -40,11 +39,11 @@ public class BookDaoImpl implements BookDao {
 	    } 
 	    catch (IOException i) 
 	    {
-	    	logger.log(Level.INFO, "IOException ", i);
+	    	throw new MyRunetimeException("wyjatek IOException w metodzie readListFromFile()", i);
 	    } 
 	    catch (ClassNotFoundException c) 
 	    {
-	    	logger.log(Level.INFO, "ClassNotFoundException ", c);
+	    	throw new MyRunetimeException("wyjatek ClassNotFoundException w metodzie readListFromFile()", c);
 	    }
 		
 	    return ksiegarnia;

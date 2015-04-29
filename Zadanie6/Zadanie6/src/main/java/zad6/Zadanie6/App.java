@@ -1,5 +1,7 @@
 package zad6.Zadanie6;
 
+import zad6.Zadanie6.exceptions.MyExceptions;
+
 
 /**
  * Hello world!

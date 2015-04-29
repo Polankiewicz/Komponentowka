@@ -1,12 +1,6 @@
 package zad6.Zadanie6;
 
-import static org.junit.Assert.assertEquals;
 
-import java.io.Serializable;
-
-import org.apache.commons.lang3.SerializationUtils;
-
-import Zad4.Zadanie4.Ksiazka;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
