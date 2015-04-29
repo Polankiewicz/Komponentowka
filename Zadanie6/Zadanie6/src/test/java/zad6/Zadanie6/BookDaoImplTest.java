@@ -1,13 +1,8 @@
 package zad6.Zadanie6;
 
-import static org.junit.Assert.*;
-
-import java.io.Serializable;
-
-import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 
-public class BookDaoImplTest {
+public class BookDaoImplTest{
 
 //	@Test
 //	public void test() {
@@ -15,6 +10,17 @@ public class BookDaoImplTest {
 //				Serializable copy = SerializationUtils.clone(original);
 //		assertEquals(original, copy);
 //	}
+	
+	@Test
+	public void readWriteTest(){
+		Ksiegarnia zapis = new Ksiegarnia();
+    	BookDaoImpl bookDaoImpl = new BookDaoImpl();
+    	
+    	bookDaoImpl.writeListToFile(zapis, "plik2.txt");    	
+    	Ksiegarnia odczyt = bookDaoImpl.readListFromFile("plik2.txt");
+    	
+    	zapis.equals(odczyt);
+	}
 	
 	
 

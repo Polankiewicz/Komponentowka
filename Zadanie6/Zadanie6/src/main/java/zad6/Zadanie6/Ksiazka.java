@@ -49,6 +49,15 @@ public class Ksiazka implements Comparable<Ksiazka>, Cloneable, Serializable
         }
     }
     
+    public boolean equals(Ksiazka k) {
+    	if(this.title != k.title) return false;
+    	if(this.author != k.author) return false;
+    	if(this.genre != k.genre) return false;
+    	if(this.ISBN != k.ISBN) return false;
+
+    	return true;
+    }
+    
 
 	public String getTitle()
 	{
