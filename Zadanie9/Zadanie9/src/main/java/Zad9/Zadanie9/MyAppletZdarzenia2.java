@@ -57,16 +57,17 @@ public class MyAppletZdarzenia2 extends Applet implements ActionListener, ItemLi
 		
 		setSize(480,500);
 		
-		// KLASA ADAPTACYJNA
+		////////////////////////////////////////////////////////// KLASA ADAPTACYJNA
         adaptacyjna = new KlasaAdaptacyjna();
 		this.addMouseListener(adaptacyjna);
 		
 		
-		// obsługa w klasie wewnetrznej
+		////////////////////////////////////////////////////////// KLASA WEWNĘTRZNA
 		wewnetrznyActionListener = new Wewnetrzna();
 		przycisk1 = new Button("WLACZ A");
 		add(przycisk1);
 		przycisk1.addActionListener(wewnetrznyActionListener);
+		
 		
 		
 		// obsługa we własnej klasie
@@ -96,26 +97,28 @@ public class MyAppletZdarzenia2 extends Applet implements ActionListener, ItemLi
 
 
         
-        //KlasaZewnetrzna klasaZewnetrzna = new KlasaZewnetrzna();
+        
+        ///////////////////////////////////////////////////////// KLASA ZEWNĘTRZNA 
+        KlasaZewnetrzna klasaZewnetrzna = new KlasaZewnetrzna(this);
         
         // radiobutton - rozmiar czcionki
         checkboxgroup1 = new CheckboxGroup();
 
         checkbox1 = new Checkbox("15", false, checkboxgroup1);
         add(checkbox1);
-        checkbox1.addItemListener(this);
+        checkbox1.addItemListener(klasaZewnetrzna);
 
         checkbox2 = new Checkbox("25", false, checkboxgroup1);
         add(checkbox2);
-        checkbox2.addItemListener(this);
+        checkbox2.addItemListener(klasaZewnetrzna);
 
         checkbox3 = new Checkbox("35", false, checkboxgroup1);
         add(checkbox3);
-        checkbox3.addItemListener(this);
+        checkbox3.addItemListener(klasaZewnetrzna);
 
         checkbox4 = new Checkbox("45", false, checkboxgroup1);
         add(checkbox4);
-        checkbox4.addItemListener(this);
+        checkbox4.addItemListener(klasaZewnetrzna);
         
         
 
@@ -311,17 +314,6 @@ public class MyAppletZdarzenia2 extends Applet implements ActionListener, ItemLi
         if(e.getItemSelectable() == przyciskk2)		bokB = !bokB;
         
         if(e.getItemSelectable() == przyciskk3)		bokC = !bokC;
-		
-        
-        // rozmiar czcionki
-        if(e.getItemSelectable() == checkbox1)		rozmiar_czcionki = 15;
-        
-        if(e.getItemSelectable() == checkbox2)		rozmiar_czcionki = 25;
-        
-        if(e.getItemSelectable() == checkbox3)		rozmiar_czcionki = 35;
-        
-        if(e.getItemSelectable() == checkbox4)		rozmiar_czcionki = 45;
-        
         
         repaint();
 	}

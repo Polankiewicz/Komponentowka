@@ -1,14 +1,10 @@
 package Zad9.Zadanie9;
 
 import java.awt.event.MouseEvent;
-
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
 
 
-public class KlasaAdaptacyjna extends MouseInputAdapter{
-
-	
+public class KlasaAdaptacyjna extends MouseInputAdapter {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
