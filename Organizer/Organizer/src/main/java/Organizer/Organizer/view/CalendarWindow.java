@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Organizer.Organizer.controller.Note;
+import Organizer.Organizer.controller.NotesList;
 import Organizer.Organizer.model.CalendarLogic;
 
 public class CalendarWindow extends JFrame implements ActionListener
@@ -35,13 +37,11 @@ public class CalendarWindow extends JFrame implements ActionListener
 	
 	private CalendarLogic calendarLogic;
 	
+	private NotesList notesList;
+	private NoteWindow noteWindow;
 	
 //	JColorChooser tcc;
 	
-//	ArrayList<Note> listOfEvents;	
-//	Note mNote;
-//	NoteWindow mNoteWindow;
-
 	
 	public void showtime() 
 	{
@@ -90,7 +90,8 @@ public class CalendarWindow extends JFrame implements ActionListener
 			buttonList.add(new JButton(Integer.toString(i+1))); 
 		
 		////////////////////////////////////////////OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
-		//buttonList.get(buttonNumeration).addActionListener(new ActionListener() { }
+		for(int i=0; i<buttonList.size(); i++)
+			buttonList.get(i).addActionListener(this);
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		
@@ -120,7 +121,6 @@ public class CalendarWindow extends JFrame implements ActionListener
 		
 		
 		
-		
 		// JLabel[] - list of days
 		String[] namesOfDays = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 		dayOfWeek = new JLabel[7];
@@ -136,74 +136,69 @@ public class CalendarWindow extends JFrame implements ActionListener
 		}
 		
 		
-		
 		/////////////////////////////////////////////////////// JColorChooser ///////////////////////////////////
 		
 		
 		// JLabel reminder 
 		remainderLabel = new JLabel();
-		
+		remainderLabel.setBounds(200, 425, 200, 30);
+		remainderLabel.setForeground(Color.red);
+		contentPane.add(remainderLabel);
 	     
 
 	    // list of saved events
-	    //listOfEvents = new ArrayList<Note>();
+		notesList = new NotesList();
 	    
-	    
-	    
-	    
+	    // add note window
+		noteWindow = new NoteWindow();
+		
 	    
 	    // JButton delete old events
 	    deleteButton = new JButton("Delete");
-	    deleteButton.setBounds(80, 420, 50, 40);
+	    deleteButton.setBounds(10, 420, 50, 40);
 	    deleteButton.setBorder(null);
 	    deleteButton.setToolTipText("Press this button to delete old events.");
 	    contentPane.add(deleteButton);
-	    	    
 		////////////////////////////////////////////OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
-		// deleteButton.addActionListener(new ActionListener() { }
+		 deleteButton.addActionListener(this);
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 
-	    
 		// Menu options
-		Menu menu = new Menu(frame);
+		Menu menu = new Menu(frame, notesList);
 		menu.menuOptions();
 		
 		
 		
-		
+		// Calendar logic - Gregorian Calendar
 		calendarLogic = new CalendarLogic(frame);
 		
+		
+		
+
 		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
 		
-		
-		
-		
-		
-		
-		////////////////////
 		frame.setVisible(true);
 	}
 	
 
 
-	
-
-	
-	
+	public void refreshCalendar()
+	{
+		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
+	}
 	
 	public void refreshCalendar(int year, int month)
 	{
 		String[] months =  {"January", "February", "March", "April", "May", "June", "July", "August",
 				"September", "October", "November", "December"};
 		
-		
 		// reload buttons
 		contentPane.repaint();
+		
 		for(int i=0; i < buttonList.size(); i++)
-		{
 			contentPane.remove(buttonList.get(i));
-		}
+		
 		
 		btnPrev.setEnabled(true);
 		btnNext.setEnabled(true);
@@ -218,11 +213,8 @@ public class CalendarWindow extends JFrame implements ActionListener
 		//Refresh the month label
 		lblMonth.setText(months[month]); 
 		
-		//lblMonth.setBounds(170, 30, 180, 25); //Re-align label with calendar
-		
 		//Select the correct year in the combo box
 		yearList.setSelectedItem(String.valueOf(year)); 
-		
 		
 		//Number Of Days, Start Of Month
 		int nod, som;
@@ -244,9 +236,8 @@ public class CalendarWindow extends JFrame implements ActionListener
 		int x = 25;
 		int y = 100;
 				
-		
 		// set first day of week
-		first=(1+first-2)%7;
+		first=(first-1)%7;
 		
 		if		(first==0) x= x+0*50;
 		else if (first==1) x= x+1*50;
@@ -256,51 +247,50 @@ public class CalendarWindow extends JFrame implements ActionListener
 		else if (first==5) x= x+5*50;
 		else if (first==6) x= x+6*50;
 		
-
 		
 		String abc = calendarLogic.getStringFromDate(1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
-		int dayToColor = Integer.parseInt(abc);
+		int currentDayToColor = Integer.parseInt(abc);
 		
-		// w przypadku ostatniego dnia miesiaca bedzie sie krzaczyc :P
 		int remaindMe = Integer.parseInt(calendarLogic.getToday())+1;
-			
+		
 		
 		// draw 
 		for(int i=0; i<days; y+=50, x=25, first=0)
 		{
-			for(int j=first; j<7 && i<days; j++, i++, x+=50, dayToColor++)
+			for(int j=first; j<7 && i<days; j++, i++, x+=50, currentDayToColor++)
 			{
+				// days positions
 				buttonList.get(i).setBounds(x,y,40,40);
 				buttonList.get(i).setBorder(null);
 				contentPane.add(buttonList.get(i));
 				buttonList.get(i).setBackground(Color.LIGHT_GRAY);
 				
 				
-//				for(int k=0; k< listOfEvents.size(); k++) // note
-//				{
-//					if(listOfEvents.get(k).getStringFromDate().equals(getStringFromDate(i+1, currentMonth, currentYear) ) )
-//					{
-//						//if (listOfEvents.get(k).ifNotNull()) 	// without empty notes
-//							buttonList.get(i).setBackground(Color.green);
-//					}
-//				}
+				// color days with notes
+				for(int k=0; k< notesList.size(); k++) // note
+				{
+					if(notesList.getNote(k).getStringFromDate()
+							.equals(calendarLogic.getStringFromDate(i+1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear()) ) )
+					{
+						if(notesList.getNote(k).ifNotNull()) 	// without empty notes
+							buttonList.get(i).setBackground(Color.green);
+					}
+				}
 				
 				// current day
-				if(dayToColor == Integer.parseInt(calendarLogic.getToday()))	
+				if(currentDayToColor == Integer.parseInt(calendarLogic.getToday()))	
 					buttonList.get(i).setBackground(Color.blue);
 				
 				
-				
-//				for(int k=0; k< listOfEvents.size(); k++) // reminder
-//				{
-//					if(listOfEvents.get(k).getStringFromDate().equals(Integer.toString(remaindMe) ) )
-//					{
-//						remainderLabel.setBounds(200, 425, 200, 30);
-//						remainderLabel.setText("New event is coming tomorrow!");
-//						remainderLabel.setForeground(Color.red);
-//						contentPane.add(remainderLabel);
-//					}
-//				}
+				// remainder
+				for(int k=0; k< notesList.size(); k++) 
+				{
+					if( notesList.getNote(k).getStringFromDate().equals(Integer.toString(remaindMe)) )
+						if(notesList.getNote(k).ifNotNull())
+							remainderLabel.setText("New event is coming tomorrow!");
+					else 
+						remainderLabel.setText("");
+				}
 					
 			}
 		}
@@ -314,10 +304,9 @@ public class CalendarWindow extends JFrame implements ActionListener
 
 	/////////////////////////////////////// DO MODELU???? ////////////////////////////////////////////////
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		// btnPrev
+	public void actionPerformed(ActionEvent e) 
+	{
+		// btnPrev - go to preview month
 		if(e.getActionCommand().equals("<<"))
 		{
 			if (calendarLogic.getCurrentMonth() == 0) //Back one year
@@ -333,7 +322,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 			refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
 		}
 		
-		// btnNext
+		// btnNext - go to next month
 		if(e.getActionCommand().equals(">>"))
 		{
 			if (calendarLogic.getCurrentMonth() == 11) //Forward one year
@@ -349,6 +338,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 			refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
 		}
 		
+		// JComboBox - yearList - chose year
 		if(e.getSource().equals(yearList) )
 		{
 			if (yearList.getSelectedItem() != null)
@@ -360,6 +350,50 @@ public class CalendarWindow extends JFrame implements ActionListener
 			}
 		}
 		
+		// buttonList - open new note window
+		for(int i=0; i<buttonList.size(); i++)
+		{
+			if(e.getSource().equals(buttonList.get(i)))
+			{
+				dayButtonOn(i+1);
+			}	
+		}
+		
+		// delete old events
+		if(e.getActionCommand().equals("Delete"))
+		{
+			int todayYear = Integer.parseInt( calendarLogic.getToday().substring(0, 4) );
+			int todayMonth = Integer.parseInt( calendarLogic.getToday().substring(4, 6) );
+			int todayDay = Integer.parseInt( calendarLogic.getToday().substring(6, 8) );
+			
+			int eventYear, eventMonth, eventDay;
+			
+			for(int i=0; i< notesList.size(); i++)
+			{				
+				eventYear = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(0, 4) );
+				eventMonth = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(4, 6) );
+				eventDay = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(6, 8) );
+				
+				// current year and month, previous days
+				if(todayYear == eventYear && todayMonth == eventMonth && todayDay > eventDay){
+					notesList.removeNote(i);
+					i--;
+				}
+				// current year, previous months
+				if(todayYear == eventYear && todayMonth > eventMonth){
+					notesList.removeNote(i);
+					i--;
+				}
+				// previous years
+				if(todayYear > eventYear){
+					notesList.removeNote(i);
+					i--;
+				}
+				
+				refreshCalendar();
+			}
+		}
+		
 	}
 	
 	
@@ -368,6 +402,37 @@ public class CalendarWindow extends JFrame implements ActionListener
 	
 	
 	
+	public void dayButtonOn (int day)
+	{	
+		Note note;
+		Boolean update = false;
+		
+		String pressedCurrentDay = calendarLogic.getStringFromDate(day, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
+		
+		// update event
+		for(int i=0; i< notesList.size(); i++)	
+		{
+			if(notesList.getNote(i).getStringFromDate().equals(pressedCurrentDay))
+			{
+				noteWindow.newNoteWindow(pressedCurrentDay, notesList.getNote(i), this);
+				note = noteWindow.getNote();
+				
+				notesList.updateNote(i, note);
+				update = true;
+			}
+		}
+		
+		// add new event
+		if (update == false)	
+		{
+			noteWindow.newNoteWindow(pressedCurrentDay, this);
+			note = noteWindow.getNote();
+			
+			notesList.addNote(note);
+		}
+		
+		refreshCalendar();
+	}
 	
 	
 }

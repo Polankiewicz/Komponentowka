@@ -41,4 +41,9 @@ public class NotesList
 		notesList.remove(index);
 	}
 	
+	public void updateNote(int index, Note note)
+	{
+		notesList.set(index, note);
+	}
+	
 }

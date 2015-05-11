@@ -41,10 +41,9 @@ public class Note
 		this.place = place; 
 	}
 	
-	// ???
 	public Boolean ifNotNull()
 	{
-		if(description!= null && place!= null)
+		if(description!= null && place!= null && !description.equals("")  && !place.equals("") )
 			return true;
 		else 
 			return false;

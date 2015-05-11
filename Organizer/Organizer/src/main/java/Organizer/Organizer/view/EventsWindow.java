@@ -1,5 +1,9 @@
 package Organizer.Organizer.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -11,7 +15,7 @@ import javax.swing.JTextField;
 import Organizer.Organizer.controller.Note;
 import Organizer.Organizer.controller.NotesList;
 
-public class EventsWindow 
+public class EventsWindow implements ActionListener
 {
 	private JFrame frame;
 	private JLabel labelPlace, labelDescription;
@@ -20,7 +24,7 @@ public class EventsWindow
 	
 	private NotesList notesList;
 	private String[] listOfDates;
-	private JComboBox choseDate;
+	private JComboBox<String> choseDate;
 	
 	
 	public EventsWindow(NotesList notesList)
@@ -74,16 +78,43 @@ public class EventsWindow
 			listOfDates[i] = fDate;
 		}
 		
-		
-		choseDate = new JComboBox(listOfDates);
+		choseDate = new JComboBox<String>(listOfDates);
 		choseDate.setBounds(110, 15, 100, 20);
 		frame.add(choseDate);
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
+		choseDate.addActionListener(this);
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		//choseDate.addActionListener(new ActionListener() { }
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
+		// show first event on start
+		if(notesList.size() > 0)
+		{
+			fieldForPlace.setText( notesList.getNote(0).getPlace() );
+			areaForDescription.setText( notesList.getNote(0).getDescription() );
+		}
+		
 		
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource().equals(choseDate))
+		{
+			if (choseDate.getSelectedItem() != null)
+			{
+				String date = choseDate.getSelectedItem().toString();
+
+				for(int i=0; i<notesList.size(); i++)
+				{
+					if(date == listOfDates[i] )
+					{
+						fieldForPlace.setText( notesList.getNote(i).getPlace() );
+						areaForDescription.setText( notesList.getNote(i).getDescription() );
+					}
+				}
+			}
+		}
 	}
 	
 }

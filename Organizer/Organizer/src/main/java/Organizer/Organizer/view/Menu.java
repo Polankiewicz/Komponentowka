@@ -18,10 +18,12 @@ public class Menu implements ActionListener
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JFrame frame;
+	private NotesList notesList;
 	
-	public Menu(JFrame frame)
+	public Menu(JFrame frame, NotesList notesList)
 	{
 		this.frame = frame;
+		this.notesList = notesList;
 	}
 	
 	public void menuOptions()
@@ -75,7 +77,7 @@ public class Menu implements ActionListener
 				
 		if(e.getActionCommand().equals("Events"))
 		{
-			EventsWindow eventsWindow = new EventsWindow(new NotesList());
+			EventsWindow eventsWindow = new EventsWindow(notesList);
 			eventsWindow.showWindow();
 		}
 					
