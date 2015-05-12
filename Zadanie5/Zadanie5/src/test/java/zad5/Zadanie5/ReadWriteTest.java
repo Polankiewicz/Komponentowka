@@ -75,11 +75,4 @@ public class ReadWriteTest {
 
 		Arrays.equals(tabToSort, tabArrays);
 	}
-	/*
-	 * @Test public void testReadWriteArrayEx() throws Exception { int[] tab =
-	 * Tablice.getTabWithRandValues(12); int[] tab2 = {2};
-	 * 
-	 * ReadWrite.writeArrayToFile(tab, "tablice.bin"); Arrays.equals(tab2,
-	 * ReadWrite.readArrayFromFile("tablice.bin")); }
-	 */
 }
