@@ -40,8 +40,6 @@ public class CalendarWindow extends JFrame implements ActionListener
 	private NotesList notesList;
 	private NoteWindow noteWindow;
 	
-//	JColorChooser tcc;
-	
 	
 	public void showtime() 
 	{
@@ -135,8 +133,6 @@ public class CalendarWindow extends JFrame implements ActionListener
 				dayOfWeek[i].setForeground(Color.red);
 		}
 		
-		
-		/////////////////////////////////////////////////////// JColorChooser ///////////////////////////////////
 		
 		
 		// JLabel reminder 

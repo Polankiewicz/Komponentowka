@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import Organizer.Organizer.Week10Components;
 import Organizer.Organizer.controller.Note;
 import Organizer.Organizer.controller.NotesList;
 
@@ -38,6 +39,7 @@ public class Menu implements ActionListener
 	     JMenuItem xmlAction = new JMenuItem("XML");
 	     JMenuItem sqlAction = new JMenuItem("SQL");
 	     JMenuItem eventAction = new JMenuItem("Events");
+	     JMenuItem settingsAction = new JMenuItem("Settings");
 	     JMenuItem infoAction = new JMenuItem("About");
 	     JMenuItem exitAction = new JMenuItem("Exit");
 
@@ -46,6 +48,8 @@ public class Menu implements ActionListener
 	     	fileMenu.addSeparator();
 	     fileMenu.add(eventAction);
 	     	fileMenu.addSeparator();
+	     fileMenu.add(settingsAction);
+	     	fileMenu.addSeparator();
 	     fileMenu.add(infoAction);
 	     	fileMenu.addSeparator();
 	     fileMenu.add(exitAction);
@@ -53,6 +57,7 @@ public class Menu implements ActionListener
 	     xmlAction.addActionListener(this);
 	     sqlAction.addActionListener(this);
 	     eventAction.addActionListener(this);
+	     settingsAction.addActionListener(this);
 	     infoAction.addActionListener(this);
 	     exitAction.addActionListener(this);
  	}
@@ -79,6 +84,12 @@ public class Menu implements ActionListener
 		{
 			EventsWindow eventsWindow = new EventsWindow(notesList);
 			eventsWindow.showWindow();
+		}
+		
+		if(e.getActionCommand().equals("Settings"))
+		{
+			Week10Components week10Components = new Week10Components();
+			week10Components.showWindow();
 		}
 					
 		if(e.getActionCommand().equals("About"))
