@@ -1,24 +1,36 @@
 package Organizer.Organizer.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class XmlOperationsWindow extends JFrame
+import Organizer.Organizer.controller.NotesList;
+import Organizer.Organizer.controller.XmlOperations;
+
+public class XmlOperationsWindow extends JFrame implements ActionListener
 {
 
 	private JFrame frame;
 	private	JTabbedPane tabbedPane;
 	private	JPanel	panel1;
 	private	JPanel	panel2;
+	private NotesList notesList;
+	private XmlOperations xmlOperations;
+	private CalendarWindow calendarWindow;
 	
-	
-	public XmlOperationsWindow()
+	public XmlOperationsWindow(NotesList notesList, CalendarWindow calendarWindow)
 	{
+		this.notesList = notesList;
+		this.calendarWindow = calendarWindow;
+		xmlOperations = new XmlOperations(notesList);
+		
 		setTitle( "XML" );
 		setSize( 300, 200 );
 
@@ -40,7 +52,7 @@ public class XmlOperationsWindow extends JFrame
 	
 	public void showWindow() 
 	{
-		XmlOperationsWindow mainFrame	= new XmlOperationsWindow();
+		XmlOperationsWindow mainFrame = new XmlOperationsWindow(notesList, calendarWindow);
 		mainFrame.setVisible(true);
 	}
 	
@@ -60,7 +72,7 @@ public class XmlOperationsWindow extends JFrame
 		panel1.add(buttonSave);
 		
 		///////////////////////////////////////////////////////////////////////////
-		//buttonSave.addActionListener(new ActionListener() {}
+		buttonSave.addActionListener(this);
 		///////////////////////////////////////////////////////////////////////////
 	}
 	
@@ -79,8 +91,25 @@ public class XmlOperationsWindow extends JFrame
 		panel2.add(buttonLoad);
 		
 		///////////////////////////////////////////////////////////////////////////
-		//buttonLoad.addActionListener(new ActionListener() {}
+		buttonLoad.addActionListener(this);
 		///////////////////////////////////////////////////////////////////////////
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getActionCommand().equals("Save"))
+		{
+			xmlOperations.Save();
+		}
+		if(e.getActionCommand().equals("Load"))
+		{
+			notesList = xmlOperations.Load();
+			calendarWindow.refreshCalendar(notesList);
+		}
+		
 	}
 	
 }

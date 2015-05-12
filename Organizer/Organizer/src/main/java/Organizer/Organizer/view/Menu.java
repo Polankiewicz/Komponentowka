@@ -20,11 +20,13 @@ public class Menu implements ActionListener
 	private JMenu fileMenu;
 	private JFrame frame;
 	private NotesList notesList;
+	private CalendarWindow calendarWindow;
 	
-	public Menu(JFrame frame, NotesList notesList)
+	public Menu(JFrame frame, NotesList notesList, CalendarWindow calendarWindow)
 	{
 		this.frame = frame;
 		this.notesList = notesList;
+		this.calendarWindow = calendarWindow;
 	}
 	
 	public void menuOptions()
@@ -62,7 +64,10 @@ public class Menu implements ActionListener
 	     exitAction.addActionListener(this);
  	}
 	
-
+	public void updateNotesList(NotesList notesList)
+	{
+		this.notesList = notesList;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -70,13 +75,13 @@ public class Menu implements ActionListener
 				
 		if(e.getActionCommand().equals("XML"))
 		{
-			XmlOperationsWindow xmlOperationsWindow = new XmlOperationsWindow();
+			XmlOperationsWindow xmlOperationsWindow = new XmlOperationsWindow(notesList, calendarWindow);
 			xmlOperationsWindow.showWindow();
 		}
 			
 		if(e.getActionCommand().equals("SQL"))
 		{
-			SqlOperationsWindow sqlOperationsWindow = new SqlOperationsWindow();
+			SqlOperationsWindow sqlOperationsWindow = new SqlOperationsWindow(notesList, calendarWindow);
 			sqlOperationsWindow.showWindow();
 		}
 				

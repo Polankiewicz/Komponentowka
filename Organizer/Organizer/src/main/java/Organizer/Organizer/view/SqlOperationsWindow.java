@@ -1,6 +1,8 @@
 package Organizer.Organizer.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,16 +10,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-public class SqlOperationsWindow extends JFrame
+import Organizer.Organizer.controller.NotesList;
+import Organizer.Organizer.controller.SqlOperations;
+import Organizer.Organizer.controller.XmlOperations;
+
+public class SqlOperationsWindow extends JFrame implements ActionListener
 {
 
 	private JFrame frame;
 	private	JTabbedPane tabbedPane;
 	private	JPanel	panel1;
 	private	JPanel	panel2;
+	private NotesList notesList;
+	private SqlOperations sqlOperations;
+	private CalendarWindow calendarWindow;
 	
-	public SqlOperationsWindow()
+	public SqlOperationsWindow(NotesList notesList, CalendarWindow calendarWindow)
 	{
+		this.notesList = notesList;
+		this.calendarWindow = calendarWindow;
+		sqlOperations = new SqlOperations(notesList);
+		
 		setTitle( "SQL" );
 		setSize( 300, 200 );
 
@@ -38,7 +51,7 @@ public class SqlOperationsWindow extends JFrame
 	
 	public void showWindow() 
 	{
-		SqlOperationsWindow mainFrame	= new SqlOperationsWindow();
+		SqlOperationsWindow mainFrame = new SqlOperationsWindow(notesList, calendarWindow);
 		mainFrame.setVisible(true);
 	}
 	
@@ -57,7 +70,7 @@ public class SqlOperationsWindow extends JFrame
 		panel1.add(buttonSave);
 		
 		///////////////////////////////////////////////////////////////////////////
-		//buttonSave.addActionListener(new ActionListener() {}
+		buttonSave.addActionListener(this);
 		///////////////////////////////////////////////////////////////////////////
 	}
 	
@@ -76,8 +89,23 @@ public class SqlOperationsWindow extends JFrame
 		panel2.add(buttonLoad);
 		
 		///////////////////////////////////////////////////////////////////////////
-		//buttonLoad.addActionListener(new ActionListener() {}
+		buttonLoad.addActionListener(this);
 		///////////////////////////////////////////////////////////////////////////
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getActionCommand().equals("Save"))
+		{
+			sqlOperations.Save();
+		}
+		if(e.getActionCommand().equals("Load"))
+		{
+			sqlOperations.Load();
+		}
+		
 	}
 	
 }

@@ -40,6 +40,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 	private NotesList notesList;
 	private NoteWindow noteWindow;
 	
+	private Menu menu;
 	
 	public void showtime() 
 	{
@@ -161,7 +162,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 		
 
 		// Menu options
-		Menu menu = new Menu(frame, notesList);
+		menu = new Menu(frame, notesList, this);
 		menu.menuOptions();
 		
 		
@@ -177,7 +178,13 @@ public class CalendarWindow extends JFrame implements ActionListener
 		frame.setVisible(true);
 	}
 	
-
+	
+	public void refreshCalendar(NotesList notesList)
+	{
+		this.notesList = notesList;
+		menu.updateNotesList(notesList);
+		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
+	}
 
 	public void refreshCalendar()
 	{
