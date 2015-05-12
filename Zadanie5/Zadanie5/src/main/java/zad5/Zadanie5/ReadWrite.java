@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,11 +24,11 @@ public class ReadWrite {
 		try (FileWriter strumienZapisu = new FileWriter(plik)) {
 			plik.createNewFile();
 			strumienZapisu.write(text);
-		} 
-		catch (IOException io) {
+		} catch (FileNotFoundException ex) {
+			logger.log(Level.INFO, "Plik nie istnieje", ex);
+		} catch (IOException io) {
 			logger.log(Level.INFO, "Wyjątek I/O ", io);
-		} 
-		catch (Exception se) {
+		} catch (Exception se) {
 			logger.log(Level.INFO, "Błąd sec ", se);
 		}
 	}
@@ -46,15 +45,12 @@ public class ReadWrite {
 
 				if (textLine != null)
 					text += textLine + "\n";
-			} 
-			while (textLine != null);
+			} while (textLine != null);
 
-		} 
-		catch (FileNotFoundException io) {
-			logger.log(Level.INFO, "Błąd sec", io);
-		} 
-		catch (IOException io) {
-			logger.log(Level.INFO, "Błąd sec", io);
+		} catch (FileNotFoundException ex) {
+			logger.log(Level.INFO, "Plik nie istnieje", ex);
+		} catch (IOException io) {
+			logger.log(Level.INFO, "Wyjątek I/O ", io);
 		}
 
 		return text;
@@ -65,38 +61,32 @@ public class ReadWrite {
 				new FileOutputStream(file))) {
 			for (int i = 0; i < tab.length; i++)
 				strumienTablicy.writeInt(tab[i]);
-		} 
-		catch (FileNotFoundException fnf){
-			logger.log(Level.INFO, "Plik nie znaleziony", fnf);
+		} catch (FileNotFoundException ex) {
+			logger.log(Level.INFO, "Plik nie istnieje", ex);
+		} catch (IOException io) {
+			logger.log(Level.INFO, "Wyjątek I/O ", io);
+		} catch (Exception se) {
+			logger.log(Level.INFO, "Błąd sec ", se);
 		}
-		catch (IOException io) {
-			logger.log(Level.INFO, "Wyjątek I/O", io);
-		}		
-		catch (Exception se) {
-			logger.log(Level.INFO, "Błąd sec", se);
-		}
-		
+
 	}
 
 	public static int[] readArrayFromFile(String file) {
 
-		int []tablica = null;
-		
-		try (RandomAccessFile fis = new RandomAccessFile(file, "rw");)
-		{
+		int[] tablica = null;
+
+		try (RandomAccessFile fis = new RandomAccessFile(file, "rw");) {
 			Integer tabSize = (int) (long) fis.length() / 4;
 			tablica = new int[tabSize];
-			
+
 			for (int i = 0; i < tabSize; i++)
 				tablica[i] = fis.readInt();
-		} 
-		catch (FileNotFoundException io) {
-			logger.log(Level.INFO, "Błąd pliku", io);
-		} 
-		catch (IOException io) {
-			logger.log(Level.INFO, "Wyjątek I/O", io);
+		} catch (FileNotFoundException ex) {
+			logger.log(Level.INFO, "Plik nie istnieje", ex);
+		} catch (IOException io) {
+			logger.log(Level.INFO, "Wyjątek I/O ", io);
 		}
-		
+
 		return tablica;
 	}
 }
