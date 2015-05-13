@@ -2,7 +2,6 @@ package zad5.Zadanie5;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;

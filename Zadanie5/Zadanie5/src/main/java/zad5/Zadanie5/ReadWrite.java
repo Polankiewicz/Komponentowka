@@ -12,8 +12,6 @@ import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import zad2.Zadanie2.Tablice;
-
 public class ReadWrite {
 
 	private static Logger logger = Logger.getLogger(ReadWrite.class.getName());
@@ -68,7 +66,6 @@ public class ReadWrite {
 		} catch (Exception se) {
 			logger.log(Level.INFO, "Błąd sec ", se);
 		}
-
 	}
 
 	public static int[] readArrayFromFile(String file) {
