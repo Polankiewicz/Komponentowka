@@ -51,7 +51,7 @@ public class BookDaoImpl implements BookDao
 	    }
 	    catch (FileNotFoundException fex)
 	    {
-	    	//throw new MyRunetimeException("Wyjątek FileNotFoundException w metodzie readListFromFile()");
+	    	//throw new MyRunetimeException("Wyjątek FileNotFoundException w metodzie readListFromFile(), fex");
 	    	logger.log(Level.INFO, "Wyjątek I/O Classggggg ", fex);
 	    }
 	    catch (IOException i) 
