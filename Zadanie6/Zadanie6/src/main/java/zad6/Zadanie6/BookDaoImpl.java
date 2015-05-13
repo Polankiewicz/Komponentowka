@@ -30,7 +30,6 @@ public class BookDaoImpl implements BookDao
 	    catch (IOException i) 
 	    {
 	    	throw new MyRunetimeException("wyjatek IOException w metodzie writeListToFile()", i);
-
 	    }
 		
 	}
@@ -45,15 +44,6 @@ public class BookDaoImpl implements BookDao
 	    {	        
 	    	ksiegarnia = (Ksiegarnia) in.readObject();
 	    } 
-	    catch (InvalidClassException i) 
-	    {
-	    	throw new MyRunetimeException("wyjatek IOException w metodzie readListFromFile() kkkkkk", i);
-	    }
-	    catch (FileNotFoundException fex)
-	    {
-	    	//throw new MyRunetimeException("Wyjątek FileNotFoundException w metodzie readListFromFile(), fex");
-	    	logger.log(Level.INFO, "Wyjątek I/O Classggggg ", fex);
-	    }
 	    catch (IOException i) 
 	    {
 	    	throw new MyRunetimeException("wyjatek IOException w metodzie readListFromFile()", i);

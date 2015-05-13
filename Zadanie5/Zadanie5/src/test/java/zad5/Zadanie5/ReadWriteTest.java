@@ -21,39 +21,27 @@ public class ReadWriteTest {
 
 		String odczyt = ReadWrite.readFromTextFile("plik.txt");
 
-		try {
-			assertEquals(odczyt, zapis);
-		} catch (AssertionError aerr) {
-			logger.log(Level.INFO, "Rózna treść", aerr);
-		}
+		assertEquals(odczyt, zapis);
 	}
 
-	@Test
+	@Test(expected=AssertionError.class)
 	public void testReadWriteTextEx() throws Exception {
 		String zapis = "Zapisanie tekstu do pliku \nęóąśłżźćń\n";
 		ReadWrite.writeToTextFile(zapis, "plik2.txt");
 
 		String odczyt = ReadWrite.readFromTextFile("plik3.txt");
 
-		try {
-			assertEquals(odczyt, zapis);
-		} catch (AssertionError aerr) {
-			logger.log(Level.INFO, "Rózna treść", aerr);
-		}
+		assertEquals(odczyt, zapis);
 	}
 
-	@Test
+	@Test(expected=AssertionError.class)
 	public void testReadWriteTextExc() throws Exception {
 		String zapis = "Jakiś \ninny\ntekst";
 		ReadWrite.writeToTextFile(zapis, "plik2.txt");
 
 		String odczyt = ReadWrite.readFromTextFile("plik.txt");
 
-		try {
-			assertEquals(odczyt, zapis);
-		} catch (AssertionError aerr) {
-			logger.log(Level.INFO, "Rózna treść", aerr);
-		}
+		assertEquals(odczyt, zapis);
 	}
 
 	@Test

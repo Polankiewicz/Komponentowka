@@ -15,6 +15,7 @@ public class App
 {
     public static void main( String[] args ) throws CloneNotSupportedException, MyRunetimeException
     {
+    	// serialization
     	Ksiegarnia ksiegarniaZapis = new Ksiegarnia();
     	BookDaoImpl bookDaoImpl = new BookDaoImpl();
     	
@@ -23,13 +24,14 @@ public class App
     	//ksiegarniaOdczyt.print();
     	
     	
-    	
-    	
+    	// equals
     	Ksiazka ksiazka1 = new Ksiazka("", "", "", 0);
     	Ksiazka ksiazka2 = (Ksiazka) ksiazka1.clone();
     	
-    	if (ksiazka1.equals(ksiazka2) == true) System.out.println("Equals good");
+    	if (ksiazka1.equals(ksiazka2) == true) 
+    		System.out.println("Equals good");
     	
+    	// exceptions
     	MyExceptions myExceptions = new MyExceptions();
     	myExceptions.testExceptions();
     }

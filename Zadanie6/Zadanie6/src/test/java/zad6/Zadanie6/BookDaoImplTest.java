@@ -1,5 +1,7 @@
 package zad6.Zadanie6;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 import zad6.Zadanie6.exceptions.MyException;
@@ -18,7 +20,7 @@ public class BookDaoImplTest{
     	zapis.equals(odczyt);
 	}
 	
-	@Test
+	@Test(expected=MyRunetimeException.class)
 	public void readWriteTestEx() throws MyRunetimeException{
 		Ksiegarnia zapis = new Ksiegarnia();
     	BookDaoImpl bookDaoImpl = new BookDaoImpl();
