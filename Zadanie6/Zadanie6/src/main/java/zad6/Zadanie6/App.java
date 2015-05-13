@@ -2,7 +2,9 @@ package zad6.Zadanie6;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
+import zad6.Zadanie6.exceptions.MyException;
 import zad6.Zadanie6.exceptions.MyExceptions;
+import zad6.Zadanie6.exceptions.MyRunetimeException;
 
 
 /**
@@ -11,7 +13,7 @@ import zad6.Zadanie6.exceptions.MyExceptions;
  */
 public class App 
 {
-    public static void main( String[] args ) throws CloneNotSupportedException
+    public static void main( String[] args ) throws CloneNotSupportedException, MyRunetimeException
     {
     	Ksiegarnia ksiegarniaZapis = new Ksiegarnia();
     	BookDaoImpl bookDaoImpl = new BookDaoImpl();

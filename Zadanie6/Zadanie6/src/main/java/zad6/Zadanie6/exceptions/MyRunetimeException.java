@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class MyRunetimeException extends RuntimeException
+public class MyRunetimeException extends Exception
 {
 	public MyRunetimeException() {}
 	public MyRunetimeException(String msg)
@@ -14,6 +14,5 @@ public class MyRunetimeException extends RuntimeException
 	public MyRunetimeException(String msg, Exception e)
 	{
 		super(msg);
-		Logger.getLogger(MyRunetimeException.class.getName()).log(Level.INFO, "IOException ", e);
 	}
 }

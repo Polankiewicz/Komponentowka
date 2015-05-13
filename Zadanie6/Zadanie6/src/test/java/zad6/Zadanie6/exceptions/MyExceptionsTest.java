@@ -1,7 +1,5 @@
 package zad6.Zadanie6.exceptions;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class MyExceptionsTest {

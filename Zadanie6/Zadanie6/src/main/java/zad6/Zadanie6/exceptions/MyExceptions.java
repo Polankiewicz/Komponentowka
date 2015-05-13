@@ -1,20 +1,20 @@
 package zad6.Zadanie6.exceptions;
 
 
-public class MyExceptions {
+public class MyExceptions extends Exception{
 
 	public void myExceptionMethod() throws MyException
 	{
 		throw new MyException("wyjatek w metodzie myExceptionMethod()");
 	}
 	
-	public void myRunetimeExceptionMethod()
+	public void myRunetimeExceptionMethod() throws MyRunetimeException
 	{
 		throw new MyRunetimeException("wyjatek w metodzie MyRunetimeException()");
 	}
 	
 	
-	public void testExceptions()
+	public void testExceptions() throws MyRunetimeException
 	{
 		try {
 			myExceptionMethod();
