@@ -29,7 +29,6 @@ public class XmlOperations
 		    File file = new File ("out1.xml");
 		    
 		    m.marshal(notesList, file);
-		    m.marshal(notesList, file);
 		} 
 		catch (JAXBException e) 
 		{
