@@ -90,7 +90,7 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		
 		if(e.getActionCommand().equals("Save"))
 		{
-			sqlOperations.Save();
+			sqlOperations.Save();calendarWindow.refreshCalendar(notesList);
 		}
 		if(e.getActionCommand().equals("Load"))
 		{
