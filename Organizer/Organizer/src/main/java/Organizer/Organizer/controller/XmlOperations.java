@@ -1,8 +1,6 @@
 package Organizer.Organizer.controller;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

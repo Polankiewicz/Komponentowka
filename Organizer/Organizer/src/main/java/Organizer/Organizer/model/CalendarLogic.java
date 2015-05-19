@@ -2,41 +2,29 @@ package Organizer.Organizer.model;
 
 import java.util.GregorianCalendar;
 
-import javax.swing.JFrame;
 
 public class CalendarLogic 
 {
-	private JFrame frame;
-	
-	//int buttonNumeration;
-	
-	private int realYear, realMonth, realDay, currentYear, currentMonth, currentDay,
-	//////////////////////
-		monthh, yearr;	
-	//////////////////////
+	private int realYear, realMonth, realDay, currentYear, currentMonth, currentDay;
 	private String today;
+	private GregorianCalendar gregorianCalendar;
 	
 	
-	public CalendarLogic(JFrame frame)
+	public CalendarLogic()
 	{
-		this.frame = frame;
-		
-		//Get real month/year
-		GregorianCalendar cal = new GregorianCalendar(); //Create calendar
-		realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
-		realMonth = cal.get(GregorianCalendar.MONTH); //Get month
-		realYear = cal.get(GregorianCalendar.YEAR); //Get year
-		currentMonth = realMonth; //Match month, day and year
+		// Create calendar
+		gregorianCalendar = new GregorianCalendar(); 
+		// real day/month/year
+		realDay = gregorianCalendar.get(GregorianCalendar.DAY_OF_MONTH);
+		realMonth = gregorianCalendar.get(GregorianCalendar.MONTH);
+		realYear = gregorianCalendar.get(GregorianCalendar.YEAR);
+		// current displayed day/month/year
+		currentMonth = realMonth;
 		currentYear = realYear;
 		currentDay = realDay;
-		////////////////////////////// current day
-		monthh = realMonth;
-		yearr = realYear;
-		//////////////////////////////
+		// current day
 		today = getStringFromDate(currentDay, currentMonth, currentYear);
-		
 	}
-	
 	
 	public int getCurrentDay() { return currentDay; }
 	public int getCurrentMonth() { return currentMonth; }
@@ -46,16 +34,13 @@ public class CalendarLogic
 	public void setCurrentMonth(int currentMonth) { this.currentMonth = currentMonth; }
 	public void setCurrentYear(int currentYear) { this.currentYear = currentYear; }
 	
-	
 	public int getRealDay() { return realDay; }
 	public int getRealMonth() { return realMonth; }
 	public int getRealYear() { return realYear; }
 	
 	public String getToday() { return today; }
 	
-	
-	
-	
+	// build string from date adding "0" when value is less then 10
 	public String getStringFromDate (int dd, int mm, int yyyy)
 	{
 		String dayString, monthString, yearString;
@@ -76,10 +61,9 @@ public class CalendarLogic
 			monthString = Integer.toString(mm+1);
 			monthString = zero + monthString;
 		}
-			
 		yearString = Integer.toString(yyyy);
 		
-		return yearString + monthString + dayString; //ddmmyyyy
+		return yearString + monthString + dayString;
 	}
 	
 	

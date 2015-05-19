@@ -20,7 +20,6 @@ import Organizer.Organizer.model.CalendarLogic;
 
 public class CalendarWindow extends JFrame implements ActionListener
 {
-	
 	private JFrame frame;
 	private Container pane;		
 	private JPanel contentPane;
@@ -61,26 +60,20 @@ public class CalendarWindow extends JFrame implements ActionListener
 		pane.add(contentPane);
 		contentPane.setBounds(0, 0, 390, 475);
 		
-		
-		
 		// JButtons for next/prev month
 		btnPrev = new JButton ("<<");
 		btnPrev.setBounds(10, 20, 40, 40);
 		btnPrev.setBorder(null);
 		contentPane.add(btnPrev);
 		btnPrev.setToolTipText("Click this button and go to previous month.");
+		btnPrev.addActionListener(this);
 		
 		btnNext = new JButton (">>");
 		btnNext.setBounds(340, 20, 40, 40);
 		btnNext.setBorder(null);
 		contentPane.add(btnNext);
 		btnNext.setToolTipText("Click this button and go to next month.");
-		
-		//////////////////////////////////////////// OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
-		btnPrev.addActionListener(this);
 		btnNext.addActionListener(this);
-		//////////////////////////////////////////////////////////////////////////////////////////
-		
 		
 		// JButtons for days
 		buttonList = new ArrayList<JButton>();
@@ -88,22 +81,16 @@ public class CalendarWindow extends JFrame implements ActionListener
 		for(int i=0; i<31; i++)
 			buttonList.add(new JButton(Integer.toString(i+1))); 
 		
-		////////////////////////////////////////////OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
 		for(int i=0; i<buttonList.size(); i++)
 			buttonList.get(i).addActionListener(this);
-		//////////////////////////////////////////////////////////////////////////////////////////
-		
 		
 		// JLabel month/years
-		lblMonth = new JLabel ("January");
+		lblMonth = new JLabel ();
 		lblYear = new JLabel ("Change year:");
 		contentPane.add(lblMonth);
 		contentPane.add(lblYear);
 		lblMonth.setBounds(170, 30, 100, 25);
 		lblYear.setBounds(10, 400, 80, 20);
-		
-		
-		
 		
 		// JComboBox - list of years
 		String[] yearListOfDays = new String[40];
@@ -114,11 +101,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 		yearList = new JComboBox<String>(yearListOfDays);
 		yearList.setBounds(300, 400, 80, 20);
 		contentPane.add(yearList);
-		////////////////////////////////////////////OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
 		yearList.addActionListener(this);
-		//////////////////////////////////////////////////////////////////////////////////////////
-		
-		
 		
 		// JLabel[] - list of days
 		String[] namesOfDays = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -134,51 +117,47 @@ public class CalendarWindow extends JFrame implements ActionListener
 				dayOfWeek[i].setForeground(Color.red);
 		}
 		
-		
-		
-		// JLabel reminder 
+		// JLabel reminder - event in next day
 		remainderLabel = new JLabel();
 		remainderLabel.setBounds(200, 425, 200, 30);
 		remainderLabel.setForeground(Color.red);
 		contentPane.add(remainderLabel);
 	     
-
-	    // list of saved events
-		notesList = new NotesList();
-	    
-	    // add note window
-		noteWindow = new NoteWindow();
-		
-	    
-	    // JButton delete old events
+		// JButton delete old events
 	    deleteButton = new JButton("Delete");
 	    deleteButton.setBounds(10, 420, 50, 40);
 	    deleteButton.setBorder(null);
 	    deleteButton.setToolTipText("Press this button to delete old events.");
 	    contentPane.add(deleteButton);
-		////////////////////////////////////////////OBSŁUGA BUTTONÓW GDZIEŚ W MODELU ////////////
-		 deleteButton.addActionListener(this);
-		//////////////////////////////////////////////////////////////////////////////////////////
+		deleteButton.addActionListener(this);
 		
-
+		
+		// list of saved events
+		notesList = new NotesList();
+		
 		// Menu options
 		menu = new Menu(frame, notesList, this);
 		menu.menuOptions();
 		
-		
+		// add note window
+		noteWindow = new NoteWindow();
 		
 		// Calendar logic - Gregorian Calendar
-		calendarLogic = new CalendarLogic(frame);
+		calendarLogic = new CalendarLogic();
 		
-		
-		
-
-		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
+		// draw days for current month/year
+		refreshCalendar();
 		
 		frame.setVisible(true);
 	}
 	
 	
+	public void refreshCalendar()
+	{
+		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
+	}
+	
+	// refresh calendar after XML/DB 
 	public void refreshCalendar(NotesList notesList)
 	{
 		this.notesList = notesList;
@@ -186,11 +165,6 @@ public class CalendarWindow extends JFrame implements ActionListener
 		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
 	}
 
-	public void refreshCalendar()
-	{
-		refreshCalendar(calendarLogic.getCurrentYear(), calendarLogic.getCurrentMonth());
-	}
-	
 	public void refreshCalendar(int year, int month)
 	{
 		String[] months =  {"January", "February", "March", "April", "May", "June", "July", "August",
@@ -202,18 +176,18 @@ public class CalendarWindow extends JFrame implements ActionListener
 		for(int i=0; i < buttonList.size(); i++)
 			contentPane.remove(buttonList.get(i));
 		
-		
+		// enable buttons and check if we can change month
 		btnPrev.setEnabled(true);
 		btnNext.setEnabled(true);
 		
-		//Too early
+		// Too early
 		if (month == 0 && year <= calendarLogic.getRealYear() - 14)
 			btnPrev.setEnabled(false); 
-		//Too late
+		// Too late
 		if (month == 11 && year >= calendarLogic.getRealYear() + 25)
 			btnNext.setEnabled(false); 
 		
-		//Refresh the month label
+		// Refresh the month label
 		lblMonth.setText(months[month]); 
 		
 		//Select the correct year in the combo box
@@ -227,12 +201,10 @@ public class CalendarWindow extends JFrame implements ActionListener
 		nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 		som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 		
-
 		drawDays(nod,som);
 	}
 	
 	
-
 	public void drawDays(int days, int first)
 	{
 		// position
@@ -240,7 +212,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 		int y = 100;
 				
 		// set first day of week
-		first=(first-1)%7;
+		first = (first-1)%7;
 		
 		if		(first==0) x= x+0*50;
 		else if (first==1) x= x+1*50;
@@ -268,24 +240,23 @@ public class CalendarWindow extends JFrame implements ActionListener
 				contentPane.add(buttonList.get(i));
 				buttonList.get(i).setBackground(Color.LIGHT_GRAY);
 				
-				
 				// color days with notes
-				for(int k=0; k< notesList.size(); k++) // note
+				for(int k=0; k< notesList.size(); k++)
 				{
 					if(notesList.getNote(k).getStringFromDate()
-							.equals(calendarLogic.getStringFromDate(i+1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear()) ) )
+							.equals(calendarLogic.getStringFromDate(
+									i+1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear()) ) )
 					{
 						if(notesList.getNote(k).ifNotNull()) 	// without empty notes
 							buttonList.get(i).setBackground(Color.green);
 					}
 				}
 				
-				// current day
+				// current day - today
 				if(currentDayToColor == Integer.parseInt(calendarLogic.getToday()))	
 					buttonList.get(i).setBackground(Color.blue);
 				
-				
-				// remainder
+				// remainder - event in next day
 				for(int k=0; k< notesList.size(); k++) 
 				{
 					if( notesList.getNote(k).getStringFromDate().equals(Integer.toString(remaindMe)) )
@@ -299,13 +270,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 		}
 	}
 
-
-
-
-
-
-
-	/////////////////////////////////////// DO MODELU???? ////////////////////////////////////////////////
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -362,6 +327,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 			}	
 		}
 		
+		//////////////////////////////// Do Modelu ////////////////////////////////////////
 		// delete old events
 		if(e.getActionCommand().equals("Delete"))
 		{

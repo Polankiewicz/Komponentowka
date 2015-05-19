@@ -12,12 +12,9 @@ import javax.swing.JTabbedPane;
 
 import Organizer.Organizer.controller.NotesList;
 import Organizer.Organizer.controller.SqlOperations;
-import Organizer.Organizer.controller.XmlOperations;
 
 public class SqlOperationsWindow extends JFrame implements ActionListener
 {
-
-	private JFrame frame;
 	private	JTabbedPane tabbedPane;
 	private	JPanel	panel1;
 	private	JPanel	panel2;
@@ -39,8 +36,8 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		getContentPane().add( topPanel );
 
 		// Create the tab pages
-		createPage1();
-		createPage2();
+		createPage1Save();
+		createPage2Load();
 
 		// Create a tabbed pane
 		tabbedPane = new JTabbedPane();
@@ -55,7 +52,7 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		mainFrame.setVisible(true);
 	}
 	
-	private void createPage1() 
+	private void createPage1Save() 
 	{
 		panel1 = new JPanel();
 		panel1.setLayout(null);
@@ -68,13 +65,10 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		buttonSave.setBounds(10, 35, 40, 40);
 		buttonSave.setBorder(null);
 		panel1.add(buttonSave);
-		
-		///////////////////////////////////////////////////////////////////////////
 		buttonSave.addActionListener(this);
-		///////////////////////////////////////////////////////////////////////////
 	}
 	
-	private void createPage2() 
+	private void createPage2Load() 
 	{
 		panel2 = new JPanel();
 		panel2.setLayout(null);
@@ -87,10 +81,7 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		buttonLoad.setBounds(10, 35, 40, 40);
 		buttonLoad.setBorder(null);
 		panel2.add(buttonLoad);
-		
-		///////////////////////////////////////////////////////////////////////////
 		buttonLoad.addActionListener(this);
-		///////////////////////////////////////////////////////////////////////////
 	}
 
 	@Override
