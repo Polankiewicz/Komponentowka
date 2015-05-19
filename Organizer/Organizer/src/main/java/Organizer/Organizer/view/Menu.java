@@ -85,7 +85,13 @@ public class Menu implements ActionListener
 		if(e.getActionCommand().equals("Events"))
 		{
 			EventsWindow eventsWindow = new EventsWindow(notesList);
-			eventsWindow.showWindow();
+			try 
+			{
+				eventsWindow.showWindow();
+			} 
+			catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		if(e.getActionCommand().equals("Settings"))

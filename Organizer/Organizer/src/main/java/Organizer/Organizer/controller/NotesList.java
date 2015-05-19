@@ -26,8 +26,11 @@ public class NotesList
 		notesList.add(note);
 	}
 	
-	public Note getNote(int index)
+	public Note getNote(int index) throws Exception
 	{
+		if(index < 0 || index > notesList.size())
+			throw new Exception();
+		
 		return notesList.get(index);
 	}
 	
@@ -36,13 +39,19 @@ public class NotesList
 		return notesList.size();
 	}
 	
-	public void removeNote(int index)
+	public void removeNote(int index) throws Exception
 	{
+		if(index < 0 || index > notesList.size())
+			throw new Exception();
+		
 		notesList.remove(index);
 	}
 	
-	public void updateNote(int index, Note note)
+	public void updateNote(int index, Note note) throws Exception
 	{
+		if(index < 0 || index > notesList.size())
+			throw new Exception();
+		
 		notesList.set(index, note);
 	}
 	

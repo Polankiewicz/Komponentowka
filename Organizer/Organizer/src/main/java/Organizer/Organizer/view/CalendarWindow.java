@@ -201,11 +201,17 @@ public class CalendarWindow extends JFrame implements ActionListener
 		nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 		som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 		
-		drawDays(nod,som);
+		try 
+		{
+			drawDays(nod,som);
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
-	public void drawDays(int days, int first)
+	public void drawDays(int days, int first) throws Exception
 	{
 		// position
 		int x = 25;
@@ -272,7 +278,7 @@ public class CalendarWindow extends JFrame implements ActionListener
 
 	
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
 		// btnPrev - go to preview month
 		if(e.getActionCommand().equals("<<"))
@@ -323,7 +329,13 @@ public class CalendarWindow extends JFrame implements ActionListener
 		{
 			if(e.getSource().equals(buttonList.get(i)))
 			{
-				dayButtonOn(i+1);
+				try 
+				{
+					dayButtonOn(i+1);
+				} 
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}	
 		}
 		
@@ -339,24 +351,30 @@ public class CalendarWindow extends JFrame implements ActionListener
 			
 			for(int i=0; i< notesList.size(); i++)
 			{				
-				eventYear = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(0, 4) );
-				eventMonth = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(4, 6) );
-				eventDay = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(6, 8) );
-				
-				// current year and month, previous days
-				if(todayYear == eventYear && todayMonth == eventMonth && todayDay > eventDay){
-					notesList.removeNote(i);
-					i--;
-				}
-				// current year, previous months
-				if(todayYear == eventYear && todayMonth > eventMonth){
-					notesList.removeNote(i);
-					i--;
-				}
-				// previous years
-				if(todayYear > eventYear){
-					notesList.removeNote(i);
-					i--;
+				try 
+				{
+					eventYear = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(0, 4) );
+					eventMonth = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(4, 6) );
+					eventDay = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(6, 8) );
+					
+					// current year and month, previous days
+					if(todayYear == eventYear && todayMonth == eventMonth && todayDay > eventDay){
+						notesList.removeNote(i);
+						i--;
+					}
+					// current year, previous months
+					if(todayYear == eventYear && todayMonth > eventMonth){
+						notesList.removeNote(i);
+						i--;
+					}
+					// previous years
+					if(todayYear > eventYear){
+						notesList.removeNote(i);
+						i--;
+					}
+				} 
+				catch (Exception e1) {
+					e1.printStackTrace();
 				}
 				
 				refreshCalendar();
@@ -367,11 +385,8 @@ public class CalendarWindow extends JFrame implements ActionListener
 	
 	
 	
-	
-	
-	
-	
-	public void dayButtonOn (int day)
+	// open new window to add note
+	public void dayButtonOn (int day) throws Exception
 	{	
 		Note note;
 		Boolean update = false;

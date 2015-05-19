@@ -28,7 +28,7 @@ public class EventsWindow implements ActionListener
 		this.notesList = notesList;
 	}
 	
-	public void showWindow() 
+	public void showWindow() throws Exception 
 	{
 		frame = new JFrame("List of all evets");
 		frame.setSize(300, 250);
@@ -100,8 +100,14 @@ public class EventsWindow implements ActionListener
 				{
 					if(date == listOfDates[i] )
 					{
-						fieldForPlace.setText( notesList.getNote(i).getPlace() );
-						areaForDescription.setText( notesList.getNote(i).getDescription() );
+						try 
+						{
+							fieldForPlace.setText( notesList.getNote(i).getPlace() );
+							areaForDescription.setText( notesList.getNote(i).getDescription() );
+						} 
+						catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 			}

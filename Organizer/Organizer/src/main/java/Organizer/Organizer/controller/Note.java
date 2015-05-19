@@ -19,6 +19,14 @@ public class Note
 	@XmlElement(name = "place")
 	private String place;
 	
+	public Note() {}
+	
+	public Note(String stringFromDate, String description, String place)
+	{
+		this.stringFromDate = stringFromDate;
+		this.description = description;
+		this.place = place;
+	}
 	
 	public String getStringFromDate() { 
 		return stringFromDate; 
@@ -41,6 +49,15 @@ public class Note
 		this.place = place; 
 	}
 	
+	public boolean equals(Note note) 
+	{
+		if(stringFromDate.equals(note.getStringFromDate())  && description.equals(note.getDescription()) && 
+				place.equals(note.getPlace()))
+		return true;
+		else 
+			return false;
+	}
+
 	public Boolean ifNotNull()
 	{
 		if(description!= null && place!= null && !description.equals("")  && !place.equals("") )
