@@ -57,6 +57,13 @@ public class Note
 		else 
 			return false;
 	}
+	
+	public String getSeparetedStringFromDate()
+	{
+		return new StringBuilder(stringFromDate.substring(0, 4)).append("/")
+			.append(stringFromDate.substring(4, 6)).append("/")
+			.append(stringFromDate.substring(6, 8)).toString();
+	}
 
 	public Boolean ifNotNull()
 	{

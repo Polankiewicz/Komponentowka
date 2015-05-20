@@ -40,11 +40,8 @@ public class NoteWindow
 		frame2.setVisible(true);
 		
 		// Labels
-		String first = date.substring(0, 4);
-		String second = date.substring(4, 6);
-		String third = date.substring(6, 8);
 		// date
-		labelDate = new JLabel( first+"/"+second+"/"+third );
+		labelDate = new JLabel( this.note.getSeparetedStringFromDate() );
 		labelDate.setBounds(110, 20, 80, 20);
 		frame2.add(labelDate);
 		

@@ -59,17 +59,7 @@ public class EventsWindow implements ActionListener
 		
 		
 		// set separated strings from dates to listOfDates
-		listOfDates = new String[ notesList.size() ];
-		
-		for(int i=0; i<notesList.size(); i++)
-		{
-			String temp = notesList.getNote(i).getStringFromDate();
-			String first = temp.substring(0, 4);
-			String second = temp.substring(4, 6);
-			String third = temp.substring(6, 8);
-			
-			listOfDates[i] = first + "/" + second + "/" + third;
-		}
+		listOfDates = notesList.getListOfDates();
 		
 		choseDate = new JComboBox<String>(listOfDates);
 		choseDate.setBounds(110, 15, 100, 20);

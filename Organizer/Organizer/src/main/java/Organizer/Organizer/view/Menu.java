@@ -18,12 +18,16 @@ public class Menu implements ActionListener
 	private JFrame frame;
 	private NotesList notesList;
 	private CalendarWindow calendarWindow;
+	//private SqlOperationsWindow sqlOperationsWindow;
 	
 	public Menu(JFrame frame, NotesList notesList, CalendarWindow calendarWindow)
 	{
 		this.frame = frame;
 		this.notesList = notesList;
 		this.calendarWindow = calendarWindow;
+		
+//		sqlOperationsWindow = new SqlOperationsWindow(this.notesList, this.calendarWindow);
+//		sqlOperationsWindow.firstLoad();
 	}
 	
 	public void menuOptions()

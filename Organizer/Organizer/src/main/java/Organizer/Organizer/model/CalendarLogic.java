@@ -63,7 +63,7 @@ public class CalendarLogic
 		}
 		yearString = Integer.toString(yyyy);
 		
-		return yearString + monthString + dayString;
+		return new StringBuilder(yearString).append(monthString).append(dayString).toString();
 	}
 	
 	

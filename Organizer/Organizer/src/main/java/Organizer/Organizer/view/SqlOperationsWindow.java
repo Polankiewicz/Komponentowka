@@ -90,7 +90,8 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		
 		if(e.getActionCommand().equals("Save"))
 		{
-			sqlOperations.Save();calendarWindow.refreshCalendar(notesList);
+			sqlOperations.Save();
+			calendarWindow.refreshCalendar(notesList);
 		}
 		if(e.getActionCommand().equals("Load"))
 		{
@@ -99,5 +100,11 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		}
 		
 	}
+	
+//	public void firstLoad()
+//	{
+//		notesList = sqlOperations.Load();
+//		calendarWindow.refreshCalendar(notesList);
+//	}
 	
 }

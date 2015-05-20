@@ -55,4 +55,16 @@ public class NotesList
 		notesList.set(index, note);
 	}
 	
+	public String[] getListOfDates()
+	{
+		String[] listOfDates = new String[notesList.size()];
+		
+		for(int i=0; i<notesList.size(); i++)
+		{
+			listOfDates[i] = notesList.get(i).getSeparetedStringFromDate();
+		}
+		
+		return listOfDates;
+	}
+	
 }

@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 
 import Organizer.Organizer.controller.Note;
 import Organizer.Organizer.controller.NotesList;
+import Organizer.Organizer.controller.SqlOperations;
+import Organizer.Organizer.controller.XmlOperations;
 import Organizer.Organizer.model.CalendarLogic;
 
 public class CalendarWindow extends JFrame implements ActionListener
@@ -145,8 +147,11 @@ public class CalendarWindow extends JFrame implements ActionListener
 		// Calendar logic - Gregorian Calendar
 		calendarLogic = new CalendarLogic();
 		
+		
+		// load events from xml file
+		XmlOperations xml = new XmlOperations(notesList);
 		// draw days for current month/year
-		refreshCalendar();
+		refreshCalendar(xml.Load());
 		
 		frame.setVisible(true);
 	}
