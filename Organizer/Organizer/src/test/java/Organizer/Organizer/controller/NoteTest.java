@@ -34,4 +34,12 @@ public class NoteTest {
 		assertFalse(note.ifNotNull());
 	}
 
+	@Test
+	public void testGetSeparetedStringFromDate() throws Exception 
+	{
+		Note note = new Note("20120220", "miasto", "rzeczy");
+		String sut = note.getSeparetedStringFromDate();
+		assertEquals("2012/02/20", sut);
+	}
+
 }

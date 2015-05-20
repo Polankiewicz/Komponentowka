@@ -101,10 +101,4 @@ public class SqlOperationsWindow extends JFrame implements ActionListener
 		
 	}
 	
-//	public void firstLoad()
-//	{
-//		notesList = sqlOperations.Load();
-//		calendarWindow.refreshCalendar(notesList);
-//	}
-	
 }

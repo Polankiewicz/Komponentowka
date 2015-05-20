@@ -52,6 +52,39 @@ public class NotesListTest {
 			assertTrue(notesList.getNote(i).equals(new Note("2015120" + (3+i), "description" + (1+i), "place"+ (1+i))));
 		}
 	}
+
+	@Test
+	public void testSize() throws Exception 
+	{
+		assertEquals(4, notesList.size());
+	}
+
+	@Test
+	public void testRemoveNote() throws Exception 
+	{
+		notesList.removeNote(0);
+		assertEquals(3, notesList.size());
+		
+		Note note = new Note("20151203", "description1", "place1");
+		
+		for(int i=0;i<notesList.size(); i++)
+		{
+			assertFalse(notesList.getNote(i).equals(note));
+		}
+	}
+	
+	@Test(expected=Exception.class)
+	public void testRemoveNoteLessIndex() throws Exception 
+	{
+		notesList.removeNote(-1);
+	}
+	
+	@Test(expected=Exception.class)
+	public void testRemoveNoteHigherIndex() throws Exception 
+	{
+		notesList.removeNote(11);
+	}
+	
 	
 	// ...
 
