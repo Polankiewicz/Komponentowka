@@ -98,5 +98,4 @@ public class XmlOperationsWindow extends JFrame implements ActionListener
 			calendarWindow.refreshCalendar(notesList);
 		}
 	}
-	
 }

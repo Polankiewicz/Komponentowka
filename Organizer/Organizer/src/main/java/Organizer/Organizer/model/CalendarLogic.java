@@ -64,10 +64,5 @@ public class CalendarLogic
 		yearString = Integer.toString(yyyy);
 		
 		return new StringBuilder(yearString).append(monthString).append(dayString).toString();
-	}
-	
-	
-	
-	
-	
+	}	
 }

@@ -103,5 +103,4 @@ public class EventsWindow implements ActionListener
 			}
 		}
 	}
-	
 }

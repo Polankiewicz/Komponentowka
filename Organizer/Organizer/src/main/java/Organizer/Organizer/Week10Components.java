@@ -19,12 +19,12 @@ public class Week10Components implements ActionListener
 	
 	public void showWindow() 
 	{
+		// JFrame - window settings
 		frame = new JFrame("Week 10 Components");
 		frame.setSize(300, 250);
 		frame.setLocation(500, 150);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
-		
 		
 		// JColorChooser - change color
 		colorButton = new JButton("Color");

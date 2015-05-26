@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 import Organizer.Organizer.controller.Note;
 import Organizer.Organizer.controller.NotesList;
-import Organizer.Organizer.controller.SqlOperations;
 import Organizer.Organizer.controller.XmlOperations;
 import Organizer.Organizer.model.CalendarLogic;
 
@@ -421,7 +420,5 @@ public class CalendarWindow extends JFrame implements ActionListener
 		}
 		
 		refreshCalendar();
-	}
-	
-	
+	}	
 }

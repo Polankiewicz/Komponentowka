@@ -103,17 +103,12 @@ public class NoteWindow
 				}
 				else
 					requiredFields.setText("Place and Description are required!");
-				
 			}
 		});
-		
-		
 	}
 
 	public Note getNote()
 	{
 		return note;
-	}
-
-	
+	}	
 }
