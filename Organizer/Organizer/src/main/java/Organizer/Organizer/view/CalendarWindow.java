@@ -180,16 +180,8 @@ public class CalendarWindow extends JFrame implements ActionListener
 		for(int i=0; i < buttonList.size(); i++)
 			contentPane.remove(buttonList.get(i));
 		
-		// enable buttons and check if we can change month
-		btnPrev.setEnabled(true);
-		btnNext.setEnabled(true);
-		
-		// Too early
-		if (month == 0 && year <= calendarLogic.getRealYear() - 14)
-			btnPrev.setEnabled(false); 
-		// Too late
-		if (month == 11 && year >= calendarLogic.getRealYear() + 25)
-			btnNext.setEnabled(false); 
+		// enable buttons and check if we can change month 
+		calendarLogic.nextPrevButtonEnable(btnNext, btnPrev);
 		
 		// Refresh the month label
 		lblMonth.setText(months[month]); 
@@ -197,17 +189,11 @@ public class CalendarWindow extends JFrame implements ActionListener
 		//Select the correct year in the combo box
 		yearList.setSelectedItem(String.valueOf(year)); 
 		
-		//Number Of Days, Start Of Month
-		int nod, som;
+		// update first day of month, and number of days in current month
+		calendarLogic.updateCalendarForCountingDays(year, month);
 		
-		//Get first day of month and number of days
-		GregorianCalendar cal = new GregorianCalendar(year, month, 7);
-		nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
-		som = cal.get(GregorianCalendar.DAY_OF_WEEK);
-		
-		try 
-		{
-			drawDays(nod,som);
+		try {
+			drawDays();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -215,29 +201,19 @@ public class CalendarWindow extends JFrame implements ActionListener
 	}
 	
 	
-	public void drawDays(int days, int first) throws Exception
+	public void drawDays() throws Exception
 	{
-		// position
-		int x = 25;
+		int x = calendarLogic.setFirstDayOfWeekPositionX();
 		int y = 100;
-				
-		// set first day of week
-		first = (first-1)%7;
-		
-		if		(first==0) x= x+0*50;
-		else if (first==1) x= x+1*50;
-		else if (first==2) x= x+2*50;
-		else if (first==3) x= x+3*50;
-		else if (first==4) x= x+4*50;
-		else if (first==5) x= x+5*50;
-		else if (first==6) x= x+6*50;
+
+		int first = calendarLogic.getFirstDayofWeek();
+		int days = calendarLogic.getNumberOdDays();
 		
 		
-		String abc = calendarLogic.getStringFromDate(1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
-		int currentDayToColor = Integer.parseInt(abc);
+		String firstDayString = calendarLogic.getStringFromDate(1, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
+		int currentDayToColor = Integer.parseInt(firstDayString);
 		
 		int remaindMe = Integer.parseInt(calendarLogic.getToday())+1;
-		
 		
 		// draw 
 		for(int i=0; i<days; y+=50, x=25, first=0)
@@ -333,92 +309,56 @@ public class CalendarWindow extends JFrame implements ActionListener
 		{
 			if(e.getSource().equals(buttonList.get(i)))
 			{
-				try 
-				{
-					dayButtonOn(i+1);
+				try {
+					calendarLogic.dayButtonOn(i+1, notesList, this);
 				} 
 				catch (Exception e1) {
 					e1.printStackTrace();
 				}
+				refreshCalendar();
 			}	
 		}
 		
-		//////////////////////////////// Do Modelu ////////////////////////////////////////
 		// delete old events
 		if(e.getActionCommand().equals("Delete"))
 		{
-			int todayYear = Integer.parseInt( calendarLogic.getToday().substring(0, 4) );
-			int todayMonth = Integer.parseInt( calendarLogic.getToday().substring(4, 6) );
-			int todayDay = Integer.parseInt( calendarLogic.getToday().substring(6, 8) );
-			
-			int eventYear, eventMonth, eventDay;
-			
-			for(int i=0; i< notesList.size(); i++)
-			{				
-				try 
-				{
-					eventYear = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(0, 4) );
-					eventMonth = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(4, 6) );
-					eventDay = Integer.parseInt( notesList.getNote(i).getStringFromDate().substring(6, 8) );
-					
-					// current year and month, previous days
-					if(todayYear == eventYear && todayMonth == eventMonth && todayDay > eventDay){
-						notesList.removeNote(i);
-						i--;
-					}
-					// current year, previous months
-					if(todayYear == eventYear && todayMonth > eventMonth){
-						notesList.removeNote(i);
-						i--;
-					}
-					// previous years
-					if(todayYear > eventYear){
-						notesList.removeNote(i);
-						i--;
-					}
-				} 
-				catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				
-				refreshCalendar();
-			}
+			calendarLogic.deleteOldEvents(notesList);
+			refreshCalendar();
 		}
 		
 	}
 	
-	
-	
-	// open new window to add note
-	public void dayButtonOn (int day) throws Exception
-	{	
-		Note note;
-		Boolean update = false;
-		
-		String pressedCurrentDay = calendarLogic.getStringFromDate(day, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
-		
-		// update event
-		for(int i=0; i< notesList.size(); i++)	
-		{
-			if(notesList.getNote(i).getStringFromDate().equals(pressedCurrentDay))
-			{
-				noteWindow.newNoteWindow(pressedCurrentDay, notesList.getNote(i), this);
-				note = noteWindow.getNote();
-				
-				notesList.updateNote(i, note);
-				update = true;
-			}
-		}
-		
-		// add new event
-		if (update == false)	
-		{
-			noteWindow.newNoteWindow(pressedCurrentDay, this);
-			note = noteWindow.getNote();
-			
-			notesList.addNote(note);
-		}
-		
-		refreshCalendar();
-	}	
+// 	// Potem to wywale, jeszcze pozniej cos z tym sprawdze wiec niech zostanie na razie
+//	// open new window to add note
+//	public void dayButtonOn (int day) throws Exception
+//	{	
+//		Note note;
+//		Boolean update = false;
+//		
+//		String pressedCurrentDay = calendarLogic.getStringFromDate(day, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
+//		
+//		// update event
+//		for(int i=0; i< notesList.size(); i++)	
+//		{
+//			if(notesList.getNote(i).getStringFromDate().equals(pressedCurrentDay))
+//			{
+//				noteWindow.newNoteWindow(pressedCurrentDay, notesList.getNote(i), this);
+//				note = noteWindow.getNote();
+//				
+//				notesList.updateNote(i, note);
+//				update = true;
+//			}
+//		}
+//		
+//		// add new event
+//		if (update == false)	
+//		{
+//			noteWindow.newNoteWindow(pressedCurrentDay, this);
+//			note = noteWindow.getNote();
+//			
+//			notesList.addNote(note);
+//		}
+//		
+//		refreshCalendar();
+//	}	
 }
