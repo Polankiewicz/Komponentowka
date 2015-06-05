@@ -27,7 +27,7 @@ public class SqlOperations
 		    Statement stmt = conn.createStatement();
 		    
 		    // clear database
-		    notesList = Load();
+		    //notesList = Load();
 		    String sql_clear = "DELETE FROM CalendarDataBaseTable";
 		    stmt.executeUpdate(sql_clear);
 		      

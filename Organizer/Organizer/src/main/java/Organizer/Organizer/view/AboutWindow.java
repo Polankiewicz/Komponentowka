@@ -16,7 +16,6 @@ public class AboutWindow
 		frame.setLayout(null);
 		frame.setResizable(false);
 		
-		
 		label1 = new JLabel("Authors:");
 		label1.setBounds(10, 15, 50, 20);
 		frame.add(label1);
@@ -28,7 +27,6 @@ public class AboutWindow
 		label3 = new JLabel("Patrycja Bubas 180511");
 		label3.setBounds(10, 55, 180, 20);
 		frame.add(label3);
-		
 		
 		frame.setVisible(true);
 	}

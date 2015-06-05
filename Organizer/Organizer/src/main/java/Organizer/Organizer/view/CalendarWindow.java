@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Organizer.Organizer.controller.Note;
 import Organizer.Organizer.controller.NotesList;
 import Organizer.Organizer.controller.XmlOperations;
 import Organizer.Organizer.model.CalendarLogic;
@@ -38,14 +38,16 @@ public class CalendarWindow extends JFrame implements ActionListener
 	private CalendarLogic calendarLogic;
 	
 	private NotesList notesList;
-	private NoteWindow noteWindow;
 	
 	private Menu menu;
+	
+	private XmlOperations xml;
+	
 	
 	public void showtime() 
 	{
 		frame = new JFrame("Calednar");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setSize(400, 530);
 		frame.setLocation(200, 100);
 		frame.setResizable(false);
@@ -140,17 +142,25 @@ public class CalendarWindow extends JFrame implements ActionListener
 		menu = new Menu(frame, notesList, this);
 		menu.menuOptions();
 		
-		// add note window
-		noteWindow = new NoteWindow();
-		
 		// Calendar logic - Gregorian Calendar
 		calendarLogic = new CalendarLogic();
 		
 		
 		// load events from xml file
-		XmlOperations xml = new XmlOperations(notesList);
+		xml = new XmlOperations(notesList);
 		// draw days for current month/year
 		refreshCalendar(xml.Load());
+		
+		// save events to xml when closing app
+		frame.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+            	xml.Save();
+                e.getWindow().dispose();
+            }
+        });
 		
 		frame.setVisible(true);
 	}
@@ -327,38 +337,5 @@ public class CalendarWindow extends JFrame implements ActionListener
 		}
 		
 	}
-	
-// 	// Potem to wywale, jeszcze pozniej cos z tym sprawdze wiec niech zostanie na razie
-//	// open new window to add note
-//	public void dayButtonOn (int day) throws Exception
-//	{	
-//		Note note;
-//		Boolean update = false;
-//		
-//		String pressedCurrentDay = calendarLogic.getStringFromDate(day, calendarLogic.getCurrentMonth(), calendarLogic.getCurrentYear());
-//		
-//		// update event
-//		for(int i=0; i< notesList.size(); i++)	
-//		{
-//			if(notesList.getNote(i).getStringFromDate().equals(pressedCurrentDay))
-//			{
-//				noteWindow.newNoteWindow(pressedCurrentDay, notesList.getNote(i), this);
-//				note = noteWindow.getNote();
-//				
-//				notesList.updateNote(i, note);
-//				update = true;
-//			}
-//		}
-//		
-//		// add new event
-//		if (update == false)	
-//		{
-//			noteWindow.newNoteWindow(pressedCurrentDay, this);
-//			note = noteWindow.getNote();
-//			
-//			notesList.addNote(note);
-//		}
-//		
-//		refreshCalendar();
-//	}	
+		
 }

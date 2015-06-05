@@ -1,6 +1,7 @@
 package Organizer.Organizer.controller;
 
 import java.io.File;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -28,8 +29,7 @@ public class XmlOperations
 		    
 		    m.marshal(notesList, file);
 		} 
-		catch (JAXBException e) 
-		{
+		catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}
@@ -44,12 +44,31 @@ public class XmlOperations
 
 			File f = new File ("out1.xml");
 			NotesList object = (NotesList) u.unmarshal(f);
-			notesList = object;
+			//notesList = object;
+			
+			// if note is duplicated - ignore it
+			for(int x=0; x<object.size(); x++)
+			{
+		    	boolean isDuplicatedNote = false;
+		    	for(int i=0; i<notesList.size(); i++)
+		    	{
+		    		if(notesList.getNote(i).getStringFromDate().equals(object.getNote(x).getStringFromDate()))
+		    		{
+		    			isDuplicatedNote = true;
+		    			break;
+		    		}
+		    	}
+		    	if(!isDuplicatedNote)
+		    		notesList.addNote(object.getNote(x));
+			}
         } 
 		catch (JAXBException e) {
 			e.printStackTrace ();
         } 
 		catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} 
+		catch (Exception e) {
 			e.printStackTrace();
 		} 
 
