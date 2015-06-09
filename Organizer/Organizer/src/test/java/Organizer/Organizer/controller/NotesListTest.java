@@ -85,6 +85,40 @@ public class NotesListTest {
 		notesList.removeNote(11);
 	}
 	
+	@Test
+	public void testUpdateNote() throws Exception 
+	{
+		notesList.updateNote(1, new Note("20151204", "descriptionX", "placeX"));
+		
+		Note note = new Note("20151204", "descriptionX", "placeX");
+		
+		assertTrue(notesList.getNote(1).equals(note));
+	}
+	
+	@Test(expected=Exception.class)
+	public void testUpdateNoteLessIndex() throws Exception 
+	{
+		notesList.updateNote(-1, new Note("20151204", "description2", "place2"));
+	}
+	
+	@Test(expected=Exception.class)
+	public void testUpdateNoteHigherIndex() throws Exception 
+	{
+		notesList.updateNote(11, new Note("20151204", "description2", "place2"));
+	}
+
+	@Test
+	public void testGetListOfDates() throws Exception 
+	{
+		String[] listOfDates = notesList.getListOfDates();
+		
+		for(int i=0; i<notesList.size(); i++)
+		{
+			assertEquals(notesList.getNote(i).getSeparetedStringFromDate(), listOfDates[i]);
+		}
+	}
+	
+	
 	
 	// ...
 

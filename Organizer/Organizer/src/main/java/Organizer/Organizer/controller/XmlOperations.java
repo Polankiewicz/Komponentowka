@@ -11,10 +11,17 @@ public class XmlOperations
 {
 	private NotesList notesList;
 	private JAXBContext context;
+	private String path;
 	
 	public XmlOperations(NotesList notesList)
 	{
 		this.notesList = notesList;
+		path = new String("out1.xml");
+	}
+	
+	public void setPath(String path)
+	{
+		this.path = path;
 	}
 	
 	public void Save()
@@ -25,7 +32,7 @@ public class XmlOperations
 			Marshaller m = context.createMarshaller();
 		    m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		    File file = new File ("out1.xml");
+		    File file = new File (path);
 		    
 		    m.marshal(notesList, file);
 		} 
@@ -42,7 +49,7 @@ public class XmlOperations
 
 			Unmarshaller u = jc.createUnmarshaller ();
 
-			File f = new File ("out1.xml");
+			File f = new File (path);
 			NotesList object = (NotesList) u.unmarshal(f);
 			//notesList = object;
 			

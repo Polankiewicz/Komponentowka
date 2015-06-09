@@ -13,11 +13,17 @@
     <notesList>
         <stringFromDate>20150613</stringFromDate>
         <description>ostatnia impreza :P</description>
-        <place>dom</place>
+        <place>impra</place>
     </notesList>
     <notesList>
-        <stringFromDate>20150604</stringFromDate>
-        <description>impreza</description>
-        <place>wcale nie szkola</place>
+        <stringFromDate>20150618</stringFromDate>
+    </notesList>
+    <notesList>
+        <stringFromDate>20150630</stringFromDate>
+    </notesList>
+    <notesList>
+        <stringFromDate>20150623</stringFromDate>
+        <description>sesja</description>
+        <place>uczelnia</place>
     </notesList>
 </notes>

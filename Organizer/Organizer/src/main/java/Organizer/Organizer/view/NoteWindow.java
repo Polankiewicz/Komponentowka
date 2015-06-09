@@ -23,7 +23,7 @@ public class NoteWindow
 	// when note does not exist
 	public void newNoteWindow(String date, CalendarWindow calendarWindow)
 	{
-			newNoteWindow(date, new Note(), calendarWindow);
+		newNoteWindow(date, new Note(), calendarWindow);
 	}
 	
 	// when note exist
