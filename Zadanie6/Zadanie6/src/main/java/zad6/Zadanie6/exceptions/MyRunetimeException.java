@@ -1,10 +1,7 @@
 package zad6.Zadanie6.exceptions;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-
-public class MyRunetimeException extends Exception
+public class MyRunetimeException extends RuntimeException
 {
 	public MyRunetimeException() {}
 	public MyRunetimeException(String msg)

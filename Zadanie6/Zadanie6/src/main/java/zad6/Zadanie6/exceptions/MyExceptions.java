@@ -14,7 +14,7 @@ public class MyExceptions extends Exception{
 	}
 	
 	
-	public void testExceptions() throws MyRunetimeException
+	public void testExceptions()
 	{
 		try {
 			myExceptionMethod();
